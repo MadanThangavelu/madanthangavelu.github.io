@@ -1,0 +1,41 @@
+# Site
+name: "Hacking Habits"
+description: "A technical blog by Madan Thangavelu"
+meta_description: "Blog about API designs, best practices, computers science and technology in general"
+logo: 'assets/images/logo.png'
+favicon: 'assets/images/logo.png'
+google_analytics: 'UA-46278016-1'
+disqus: 'hackinghabits-com-1'
+mailchimp-list: 'https://hackinghabits.us7.list-manage.com/subscribe/post?u=1905d7890664dc19a7db56f71&amp;id=03445b764c'
+
+# Authors
+authors:
+  madan:
+    name: Madan Thangavelu
+    display_name: Madan
+    gravatar: 2bf96ac5a4cd362b77c3503fedb03e92
+    email: madankumar.t@gmail.com
+    web: https://hackinghabits.com
+    twitter: https://twitter.com/hackinghabits
+    description: "Engineering manager @ Uber. I love building scalable API Platforms serving thousands of APIs to millions of customers each second. This blog is my way of keeping up with technology."
+
+# Plugins
+plugins: 
+  - jekyll-paginate
+  - jekyll-archives
+    
+# Archives
+jekyll-archives:
+  enabled:
+    - categories
+  layout: archive
+  permalinks:
+    category: '/category/:name/'
+    
+# Pagination 
+paginate: 6
+paginate_path: /page:num/
+    
+# Other
+markdown: kramdown
+highlighter: rouge

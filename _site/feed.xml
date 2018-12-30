@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <description>A technical blog by Madan Thangavelu</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 30 Dec 2018 00:31:04 -0800</pubDate>
+    <lastBuildDate>Sun, 30 Dec 2018 00:31:04 -0800</lastBuildDate>
+    <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>Self-hosted password manager</title>
+        <description>&lt;p&gt;The most reused password used in the world is 123456. There are only a few different options when it comes to choosing your password and remembering them. We will walk through a few options for creating and storing your password. Finally, I will introduce a web based password manager that I created over a weekend as a fun project. It can be self hosted for free while providing the best parts of all the available options to store and secure your passwords.&lt;/p&gt;
+
+&lt;!--excerpt_separator--&gt;
+
+&lt;h2 id=&quot;create-passwords-and-memorize&quot;&gt;Create passwords and memorize&lt;/h2&gt;
+
+&lt;p&gt;Humans reuse the same password and sometimes relatively simple ones. Those who are sensitive about security innovate on their password patterns. If you have a good memory, this is an option, not the best though. Attackers can extract patterns if they have access to a few of your passwords.&lt;/p&gt;
+
+&lt;h2 id=&quot;use-single-identity-providers&quot;&gt;Use single identity providers&lt;/h2&gt;
+
+&lt;p&gt;Single identity provider systems like &lt;a href=&quot;http://openid.net/what-is-openid/&quot;&gt;openId&lt;/a&gt; should have been the norm as it provides a great way to keep your identity secure while getting access to large number of website. The adoption of this technology did not unfold the way it was envisioned. The failure can be attributed to two reasons. The need for a single company providing the identity, e.g., openId, facebookConnect. The other reason is that smaller websites would be least bothered to spend the effort to integrate with these systems which are fairly more involved that just storing salted encrypted passwords in the database.&lt;/p&gt;
+
+&lt;h2 id=&quot;master-password-with-hosted-service&quot;&gt;Master password with hosted service&lt;/h2&gt;
+
+&lt;p&gt;There are a number of companies that provide hosted and self-hosted options to secure all your passwords behind a master password. This is by far the most widely adopted option for the average security conscious person. Companies like lastpass, 1password provide this option. The only issue is that it provides the attacker a single large pot of gold. With chrome extensions provided by these companies, it could result in &lt;a href=&quot;https://blog.lastpass.com/2017/03/security-update-for-the-lastpass-extension.html/&quot;&gt;security vulnerabilities&lt;/a&gt;. It is well known that your data is as secure as your weakest link.&lt;/p&gt;
+
+&lt;p&gt;Those who are uncomfortable with hosted solutions, can opt for self-hosted solutions. For individuals it can be expensive for no clear ROI.&lt;/p&gt;
+
+&lt;p&gt;One of the free option to store your own password vault is using keepassX&lt;a href=&quot;http://www.keepassx.org/&quot;&gt;2&lt;/a&gt;. It is a great software that has good support across all platforms, both mobile and desktop. The main issue of this system is synchronization of passwords file. I have had situations where the file got corrupted while synchronizing it using dropbox.&lt;/p&gt;
+
+&lt;h2 id=&quot;best-of-all-options&quot;&gt;Best of all options&lt;/h2&gt;
+
+&lt;p&gt;None of the above options seem perfect. The ideal system should have the best features of all those systems. It should be free, should not be the single stop pot of gold for hackers and should not lock us into a single provider (like openID).&lt;/p&gt;
+
+&lt;p&gt;This led me to create my own &lt;a href=&quot;https://github.com/HackingHabits/PersonalPasswordManager&quot;&gt;password manager&lt;/a&gt; that can be self hosted on any free providers like heroku or google app engine. This provides the necessary flexibility of having a web based service that is secure and free, that almost no one but you would know even exists.&lt;/p&gt;
+
+&lt;p&gt;The implementation has a UI that encrypts the password using your master password and &lt;a href=&quot;https://bitwiseshiftleft.github.io/sjcl/&quot;&gt;Stanford Javascript Crypto Library&lt;/a&gt;. The backend is a python &lt;a href=&quot;http://flask.pocoo.org/&quot;&gt;Flask&lt;/a&gt; application that receives an already encrypted password via https and just stores it in the backend in a blob store. Here is the UI of the application.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2012-10-09-self-hosted-password-manager/password-manager.png&quot; alt=&quot;self hosted password manager&quot; width=&quot;336px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I did not spend time optimizing the specific crypto technique as I was more focused on getting the application to work end to end over the weekend. I am sure there will be opportunities to improve on the specific crypto options.&lt;/p&gt;
+
+&lt;p&gt;In order to lookup/store passwords:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;you must be logged in into your google account.&lt;/li&gt;
+  &lt;li&gt;you must also know your mater password.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I have been fairly happy with the functionality is has been providing me with the layers of security. You can optionally configure it such that you would not need your google account to be logged in.&lt;/p&gt;
+
+&lt;h2 id=&quot;guide-to-have-one-of-your-own-hosted-password-manager&quot;&gt;Guide to have one of your own hosted password manager&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/HackingHabits/PersonalPasswordManager&quot;&gt;Github Source&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.slideshare.net/hackinghabits/personal-passwordmanager-installation-14646084&quot;&gt;Slideshare – Installation guide&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.slideshare.net/hackinghabits/password-manager-howtoguide&quot;&gt;Slideshare – How to guide&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Tue, 09 Oct 2012 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000/software/2012/10/09/self-hosted-password-manager.html</link>
+        <guid isPermaLink="true">http://localhost:4000/software/2012/10/09/self-hosted-password-manager.html</guid>
+        
+        
+        <category>Software</category>
+        
+      </item>
+    
+  </channel>
+</rss>
