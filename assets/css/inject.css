@@ -3,3 +3,8 @@
 .acs-side-bar {
   background-color: rgb(240, 243, 242)
 }
+
+.plugin_pagetree_current {
+    border-left: 2px solid rgb(29, 190, 137);
+    padding-left: 10px; 
+}
