@@ -113,3 +113,7 @@ body {
     border-bottom: 1px solid #efefef;
     padding-bottom: 10px;
 }
+
+.plugin_pagetree_children_span {
+  padding-left: 5px;
+}
