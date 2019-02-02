@@ -25,3 +25,12 @@ body {
     color: #2e3138;
     font-style: none;
 }
+
+#main-content p {
+    line-height: 1.8em;
+    font-size: 1.2em;
+    font-style: normal;
+    font-weight: 400;
+    color: rgb(46, 49, 56);
+    font-family: "Helvetica Neue";
+}
