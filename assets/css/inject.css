@@ -26,7 +26,7 @@ body {
     font-style: none;
 }
 
-#main-content p {
+#main-content p, #main-content ul, #main-content ul li {
     line-height: 1.8em;
     font-size: 1.2em;
     font-style: normal;
