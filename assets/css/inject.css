@@ -82,3 +82,8 @@ body {
 .confluence-information-macro .aui-icon {
   display: none;
 }
+
+.two-right-sidebar .aside .toc-macro ul {
+  list-style:none;
+  color: rgb(120, 126, 130);
+}
