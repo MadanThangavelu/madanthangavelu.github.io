@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import url("https://use.fontawesome.com/releases/v5.7.1/css/all.css");
+
 .acs-side-bar {
   background-color: rgb(240, 243, 242)
 }
