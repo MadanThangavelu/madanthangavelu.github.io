@@ -108,3 +108,8 @@ body {
 .acs-side-bar {
   border-right: 2px solid #efefef;
 }
+
+.page-metadata {
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 10px;
+}
