@@ -87,3 +87,7 @@ body {
   list-style: none;
   color: rgb(120, 126, 130);
 }
+
+.plugin_pagetree_childtoggle_container {
+ display: none; 
+}
