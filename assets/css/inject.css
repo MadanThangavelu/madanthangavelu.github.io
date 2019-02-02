@@ -106,3 +106,6 @@ body {
   display: none;
 }
 
+.acs-side-bar {
+  border-right: 2px solid #efefef;
+}
