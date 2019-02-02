@@ -30,7 +30,7 @@ body {
     font-style: none;
 }
 
-#main-content p, #main-content ul, #main-content ul li {
+#main-content p {
     line-height: 1.8em;
     font-size: 1.2em;
     font-style: normal;
@@ -38,4 +38,14 @@ body {
     color: rgb(46, 49, 56);
     font-family: "Helvetica Neue";
     padding-top: 10px;
+}
+
+
+#main-content ul, #main-content ul li {
+    line-height: 1.8em;
+    font-style: normal;
+    font-weight: 400;
+    color: rgb(46, 49, 56);
+    font-family: "Helvetica Neue";
+    padding-top: 5px;
 }
