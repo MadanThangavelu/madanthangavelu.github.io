@@ -26,8 +26,16 @@ body {
     font-style: none;
 }
 
-#main-content h1 em {
+#main-content h1 em, #main-content h2 em {
     font-style: none;
+}
+
+#main-content h2 {
+    font-weight: 700;
+    margin: 2em 0 15px 0;
+    font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    border-bottom: 1px solid #eee;
+    color: #2e3138;
 }
 
 #main-content p {
