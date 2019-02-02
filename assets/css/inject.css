@@ -100,3 +100,7 @@ body {
   height: 70px;
   padding-top: 15px;
 }
+
+.ia-secondary-header-title {
+  display: none;
+}
