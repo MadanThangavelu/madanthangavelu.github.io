@@ -61,3 +61,20 @@ body {
 .two-right-sidebar normal {
  border-right: 1px solid #efefef; 
 }
+
+.confluence-information-macro {
+    border: none;
+    background-color: rgb(242, 250, 253);
+    border-left: 5px solid rgb(42, 152, 185);
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.confluence-information-macro ul {
+      padding-left: 15px;
+}
+
+.confluence-information-macro p.title {
+    font-size: 1.3em;
+    padding-bottom: 10px;
+}
