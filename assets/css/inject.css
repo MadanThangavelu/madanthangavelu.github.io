@@ -74,7 +74,7 @@ body {
     padding-left: 15px;
 }
 
-.confluence-information-macro .title {
+.confluence-information-macro p.title {
     font-size: 1.3em;
     padding-bottom: 10px;
 }
