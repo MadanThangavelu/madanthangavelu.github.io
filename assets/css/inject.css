@@ -10,3 +10,12 @@
     border-left: 2px solid rgb(29, 190, 137);
     padding-left: 10px; 
 }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif"
+}
+
+.main-content p {
+  font-size: 1.2em;
+  line-height: 1.6em;
+}
