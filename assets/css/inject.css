@@ -57,3 +57,7 @@ body {
     font-family: "Helvetica Neue";
     padding-top: 5px;
 }
+
+.two-right-sidebar normal {
+ border-right: 1px solid #efefef; 
+}
