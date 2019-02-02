@@ -71,7 +71,7 @@ body {
 }
 
 .confluence-information-macro ul {
-      padding-left: 15px;
+    padding-left: 15px;
 }
 
 .confluence-information-macro .title {
@@ -80,14 +80,18 @@ body {
 }
 
 .confluence-information-macro .aui-icon {
-  display: none;
+    display: none;
 }
 
 .two-right-sidebar .aside .toc-macro ul {
-  list-style: none;
-  color: rgb(120, 126, 130);
+    list-style: none;
+    color: rgb(120, 126, 130);
 }
 
 .plugin_pagetree_childtoggle_container {
- display: none; 
+    display: none; 
+}
+
+.plugin_pagetree_children_content {
+    padding-top: 10px; 
 }
