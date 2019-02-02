@@ -95,3 +95,8 @@ body {
 .plugin_pagetree_children_content {
     padding-top: 10px; 
 }
+
+.aui-header {
+  height: 70px;
+  padding-top: 15px;
+}
