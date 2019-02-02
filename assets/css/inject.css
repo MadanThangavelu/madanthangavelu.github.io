@@ -15,12 +15,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif"
 }
 
-.main-content p {
-  font-size: 1.2em;
-  line-height: 1.6em;
-}
-
-.main-content h1 {
+#main-content h1 {
     font-size: 1.9em;
     line-height: 1.7em;
     font-weight: 700;
