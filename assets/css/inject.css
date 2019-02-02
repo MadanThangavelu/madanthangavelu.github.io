@@ -105,3 +105,13 @@ body {
 .ia-secondary-header-title {
   display: none;
 }
+
+.plugin_pagetree_current {
+    background-color: rgb(29, 190, 137);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.plugin_pagetree_current a {
+  color: #ffffff;
+}
