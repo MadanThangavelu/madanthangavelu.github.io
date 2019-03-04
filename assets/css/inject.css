@@ -74,22 +74,11 @@ body {
     padding-bottom: 10px;
 }
 
-.confluence-information-macro .aui-icon {
-    display: none;
-}
-
 .two-right-sidebar .aside .toc-macro ul {
     list-style: none;
     color: rgb(120, 126, 130);
 }
 
-.plugin_pagetree_childtoggle_container {
-    display: none; 
-}
-
-.plugin_pagetree_children_content {
-    padding-top: 10px; 
-}
 
 .aui-header {
   height: 70px;
