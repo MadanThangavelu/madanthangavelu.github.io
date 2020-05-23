@@ -139,6 +139,8 @@
     
 <!-- Categories Jumbotron
 ================================================== -->
+
+{% if page.url == "/" %}
 <div class="jumbotron fortags">
 	<div class="d-md-flex h-100">
 		<div class="col-md-4 transpdark align-self-center text-center h-100">
@@ -162,6 +164,7 @@
 		</div>
 	</div>
 </div>
+{% endif %}
  
 
 
@@ -170,11 +173,8 @@
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+            <div class="col-md-12 col-sm-12 text-center">
                  Copyright © {{ site.time | date: "%Y" }} {{ site.name }} 
-            </div>
-            <div class="col-md-6 col-sm-6 text-center text-lg-right">    
-                <a target="_blank" href="https://www.wowthemes.net">Mediumish Theme</a> by WowThemes.net
             </div>
         </div>
     </div>
@@ -183,7 +183,9 @@
 ================================================== -->
 
    
-</div> <!-- /.site-content>
+</div> 
+
+<!-- /.site-content> -->
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

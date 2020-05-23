@@ -6,7 +6,7 @@
     
 <link rel="icon" href="/assets/images/logo.png">
     
-<title>REST is not a standard | Hacking Habits</title>
+<title>An opnionated REST URL design | Hacking Habits</title>
     
 <meta name="description" content="A quick overview on why REST is not a standard but merely an architectural style that most of us use but do not understand."> 
     
@@ -117,19 +117,19 @@
     </p>
     <ul>
         <li class="ml-1 mr-1">
-        <a target="_blank" href="https://twitter.com/intent/tweet?text=REST is not a standard&url=http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <a target="_blank" href="https://twitter.com/intent/tweet?text=An opnionated REST URL design&url=http://localhost:4000/software/2020/05/22/opinionated-rest-url-design.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
         <i class="fab fa-twitter"></i>
         </a>
         </li>
         
         <li class="ml-1 mr-1">
-        <a target="_blank" href="https://facebook.com/sharer.php?u=http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+        <a target="_blank" href="https://facebook.com/sharer.php?u=http://localhost:4000/software/2020/05/22/opinionated-rest-url-design.html" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
         <i class="fab fa-facebook-f"></i>
         </a>
         </li>
         
         <li class="ml-1 mr-1">
-        <a target="_blank" href="https://plus.google.com/share?url=http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html" onclick="window.open(this.href, 'facebook-google', 'width=550,height=435');return false;">
+        <a target="_blank" href="https://plus.google.com/share?url=http://localhost:4000/software/2020/05/22/opinionated-rest-url-design.html" onclick="window.open(this.href, 'facebook-google', 'width=550,height=435');return false;">
         <i class="fab fa-google"></i>
         </a>
         </li>
@@ -168,12 +168,12 @@
                 
                 -->
                 <!-- Post Title -->
-				<h1 class="posttitle">REST is not a standard</h1> 
+				<h1 class="posttitle">An opnionated REST URL design</h1> 
 
                 <!-- Post Date -->
                 <!-- <p>
                 <small>
-                    <span class="post-date"><time class="post-date" datetime="2020-05-20">20 May 2020</time></span>           
+                    <span class="post-date"><time class="post-date" datetime="2020-05-22">22 May 2020</time></span>           
                     
                     </small>
                 </p>
@@ -184,50 +184,13 @@
 			</div>
 
 			<!-- Post Featured Image -->
-			<img class="featured-image img-fluid" src="http://localhost:4000/assets/images/posts/2020-05-20-REST-is-not-a-standard/restful-not-a-standard.png" alt="REST is not a standard">
+			<img class="featured-image img-fluid" src="http://localhost:4000/assets/images/posts/2020-05-22-rest-url-design/title.png" alt="An opnionated REST URL design">
 			<!-- End Featured Image -->
 
 			<!-- Post Content -->
 			<div class="article-post">
-				<p>Around 2000 the internet was largely composed of static websites. We were comfortable going to foobar.com and happy receiving HTML content back which the browser would then render. We would then click on a link of submit a button and another page would be hurled back at us. This back and forth pingpong was largely how the World Wide Web was pieced together.  In former times, large desktop computers were the primary single medium of accessing these websites. These were indeed happy and simple times, however, not as exciting and chaotic as today - just 20 years later.</p>
+				<p>This is a sample</p>
 
-<blockquote>
-  <p>URL is not the best
-In the test</p>
-</blockquote>
-
-<h2 id="the-need-for-standardiztion">The need for Standardiztion</h2>
-
-<p>To understand why we currently live in a spaghetti world of web technologies, it would be prudent to view the evolution across a few dimensions.</p>
-
-<!--excerpt_separator-->
-
-<h5 id="medium-of-access">Medium of access</h5>
-
-<p>The data from the server was only accessed by a bulky desktop. The million dollar weather app business had to develop a single web page to cater its customers. Contrast that with a VC funded sillicon valley company with a brilliant weather app idea. The first version must work seamlessly on a native IOs app, native android App, native desktop application, native laptop application, IoT device by your bedside that runs on an iPad mod and oh, finally all the different web browsers. Here is the kicker! All devices must be in sync with the cities I configured the weather for.</p>
-
-<p>I love getting the weather notifications across 5 devices a few seconds apart!</p>
-
-<h5 id="attention-span">Attention Span</h5>
-
-<p>In order to keep the user engaged in 2020, you have to keep changing the content on the page they are viewing. If it is not dynamic the content will feel outdated. This necessitates the need to fetch more data from the browser as the user continues to stare at the device/app of choice.</p>
-
-<h5 id="technology-standardization">Technology Standardization</h5>
-
-<p>In late 1990s we saw browser wars where their capabilities allowed innovation but left us with a largely broken ecosystem - a feature would work in internet explorer but not on netscape. Standardization bodies like the IETF, W3C and the now ceased The Web Standards Project did standardize the aspects of the infrastructure powering the internet - html, javascript, protocol like HTTP, WebRTC etc, but there was never success in standardizing the “application layer”. This of “application layer” as the “what” and the technology standardizations as the “how”.</p>
-
-<p>What you speak (actual applications you build)
-Grammar with allowed variations (REST)
-Words (application protocols HTTP, HTTP2, )
-Letters (network protocol)</p>
-
-<p>To solve the attention span, the medium of access -  XMLHttpRequest (XHR) in browsers in the mid 2000’s was a huge win for the Web Platform. This allowed a browser to speak multiple requests to the server and fetch the information they need without reloading the entire view. This gave birth to APIs.  APIs became the contract between the backend and the frontend systems to “transfer state”.</p>
-
-<h2 id="rest-was-born">REST was born</h2>
-
-<p>In 2000 Roy fielding proposed “Representational State Transfer” as a principled approach to transfer state from the backend to the frontend. As with all proposals, a good number of it was followed, along the way, we discovered and modified things as required.</p>
-
-<p>REST was originally a guidance, the foundational pieces were concrete but the final implementation was open ended. As an analogy, REST provides us parts and components and some suggestions, but nothing stops us from reinventing the wheel - literally. Imagine we provide the following proposal, a car has a steering wheel which should control the wheels. There should be three or four wheels. There should be three pedals controlling clutch, gear and the brakes. One can imagine how many types of cars would be innovated which fit the proposal. REST has evolved in somewhat in that direction. The basic constructs of URL, Query params, post params, HTTP Method, Some standard headers are available, but when the rubber hits the road (keeping the car analogy), every API is a snowflake. Knowing one company’s API does not automatically translate to using another company’s API.</p>
 
 			</div>
                 
@@ -287,10 +250,8 @@ Letters (network protocol)</p>
             <!-- Prev/Next -->
             <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
             
-            <a class="prev d-block col-md-6" href="http://localhost:4000/software/2012/10/09/self-hosted-password-manager.html"> &laquo; Self-hosted password manager</a>
+            <a class="prev d-block col-md-6" href="http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html"> &laquo; REST is not a standard</a>
             
-            
-            <a class="next d-block col-md-6 text-lg-right" href="http://localhost:4000/software/2020/05/22/opinionated-rest-url-design.html">An opnionated REST URL design &raquo; </a>
             
             <div class="clearfix"></div>
             </div>

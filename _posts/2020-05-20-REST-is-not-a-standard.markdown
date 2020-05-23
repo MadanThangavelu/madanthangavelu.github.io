@@ -9,6 +9,8 @@ image: /assets/images/posts/2020-05-20-REST-is-not-a-standard/restful-not-a-stan
 
 Around 2000 the internet was largely composed of static websites. We were comfortable going to foobar.com and happy receiving HTML content back which the browser would then render. We would then click on a link of submit a button and another page would be hurled back at us. This back and forth pingpong was largely how the World Wide Web was pieced together.  In former times, large desktop computers were the primary single medium of accessing these websites. These were indeed happy and simple times, however, not as exciting and chaotic as today - just 20 years later.
 
+> URL is not the best
+> In the test
 
 ## The need for Standardiztion
 

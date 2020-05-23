@@ -5,13 +5,32 @@
     <description>A technical blog by Madan Thangavelu</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 23 May 2020 08:06:33 -0700</pubDate>
-    <lastBuildDate>Sat, 23 May 2020 08:06:33 -0700</lastBuildDate>
+    <pubDate>Sat, 23 May 2020 09:54:59 -0700</pubDate>
+    <lastBuildDate>Sat, 23 May 2020 09:54:59 -0700</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>An opnionated REST URL design</title>
+        <description>&lt;p&gt;This is a sample&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 22 May 2020 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000/software/2020/05/22/opinionated-rest-url-design.html</link>
+        <guid isPermaLink="true">http://localhost:4000/software/2020/05/22/opinionated-rest-url-design.html</guid>
+        
+        
+        <category>Software</category>
+        
+      </item>
     
       <item>
         <title>REST is not a standard</title>
         <description>&lt;p&gt;Around 2000 the internet was largely composed of static websites. We were comfortable going to foobar.com and happy receiving HTML content back which the browser would then render. We would then click on a link of submit a button and another page would be hurled back at us. This back and forth pingpong was largely how the World Wide Web was pieced together.  In former times, large desktop computers were the primary single medium of accessing these websites. These were indeed happy and simple times, however, not as exciting and chaotic as today - just 20 years later.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;URL is not the best
+In the test&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h2 id=&quot;the-need-for-standardiztion&quot;&gt;The need for Standardiztion&lt;/h2&gt;
 

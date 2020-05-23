@@ -19,6 +19,22 @@
     }
 }
 
+.bg-lightblue {
+    background: #e8f3ec !important;
+}
+
+.jumbotron {
+    background-color: #343a40;
+}
+
+.jumbotron.fortags {
+    background-image: none;
+}
+
+#comments {
+    margin-top: 130px;    
+}
+
 .article-post {
     h2 {
         margin-top: 60px;
@@ -39,4 +55,14 @@
 
 .featured-image {
     margin-bottom: 100px;   
+}
+
+.post-top-meta {
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.after-post-tags {
+    margin-top: 50px;
+    border-bottom: 1px solid #00ab6b;
 }
