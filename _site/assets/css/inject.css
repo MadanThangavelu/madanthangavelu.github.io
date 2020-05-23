@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+@import url("https://use.fontawesome.com/releases/v5.7.1/css/all.css");
+
+.acs-side-bar {
+  background-color: rgb(240, 243, 242)
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#main-content h1 {
+    font-size: 1.9em;
+    line-height: 1.7em;
+    font-weight: 700;
+    margin: 2em 0 15px 0;
+    font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    border-bottom: 1px solid #eee;
+    color: #2e3138;
+    font-style: none;
+}
+
+#main-content h1 em, #main-content h2 em {
+    font-style: none;
+}
+
+#main-content h2 {
+    font-weight: 700;
+    margin: 2em 0 15px 0;
+    font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    border-bottom: 1px solid #eee;
+    color: #2e3138;
+}
+
+#main-content p {
+    line-height: 1.8em;
+    font-size: 1.2em;
+    font-style: normal;
+    font-weight: 400;
+    color: rgb(46, 49, 56);
+    font-family: "Helvetica Neue";
+    padding-top: 10px;
+}
+
+
+#main-content ul, #main-content ul li {
+    line-height: 1.8em;
+    font-style: normal;
+    font-weight: 400;
+    color: rgb(46, 49, 56);
+    font-family: "Helvetica Neue";
+    padding-top: 5px;
+}
+
+.two-right-sidebar .normal {
+ border-right: 1px solid #efefef; 
+}
+
+.confluence-information-macro {
+    border: none;
+    background-color: rgb(242, 250, 253);
+    border-left: 5px solid rgb(42, 152, 185);
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.confluence-information-macro ul {
+    padding-left: 15px;
+}
+
+.confluence-information-macro p.title {
+    font-size: 1.3em;
+    padding-bottom: 10px;
+}
+
+.two-right-sidebar .aside .toc-macro ul {
+    list-style: none;
+    color: rgb(120, 126, 130);
+}
+
+
+.aui-header {
+  height: 70px;
+  padding-top: 15px;
+}
+
+.ia-secondary-header-title {
+  display: none;
+}
+
+.acs-side-bar {
+  border-right: 2px solid #efefef;
+}
+
+.page-metadata {
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 10px;
+}
+
+.plugin_pagetree_children_span {
+  padding-left: 5px;
+}

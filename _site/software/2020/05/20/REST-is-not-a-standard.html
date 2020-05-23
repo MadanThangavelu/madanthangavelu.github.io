@@ -6,9 +6,9 @@
     
 <link rel="icon" href="/assets/images/logo.png">
     
-<title>Self-hosted password manager | Hacking Habits</title>
+<title>REST is not a standard | Hacking Habits</title>
     
-<meta name="description" content="This was a weekend project to build a password manager that can be self hosted on google app engine."> 
+<meta name="description" content="A quick overview on why REST is not a standard but merely an architectural style that most of us use but do not understand."> 
     
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     
@@ -117,19 +117,19 @@
     </p>
     <ul>
         <li class="ml-1 mr-1">
-        <a target="_blank" href="https://twitter.com/intent/tweet?text=Self-hosted password manager&url=http://localhost:4000/software/2012/10/09/self-hosted-password-manager.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <a target="_blank" href="https://twitter.com/intent/tweet?text=REST is not a standard&url=http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
         <i class="fab fa-twitter"></i>
         </a>
         </li>
         
         <li class="ml-1 mr-1">
-        <a target="_blank" href="https://facebook.com/sharer.php?u=http://localhost:4000/software/2012/10/09/self-hosted-password-manager.html" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+        <a target="_blank" href="https://facebook.com/sharer.php?u=http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
         <i class="fab fa-facebook-f"></i>
         </a>
         </li>
         
         <li class="ml-1 mr-1">
-        <a target="_blank" href="https://plus.google.com/share?url=http://localhost:4000/software/2012/10/09/self-hosted-password-manager.html" onclick="window.open(this.href, 'facebook-google', 'width=550,height=435');return false;">
+        <a target="_blank" href="https://plus.google.com/share?url=http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html" onclick="window.open(this.href, 'facebook-google', 'width=550,height=435');return false;">
         <i class="fab fa-google"></i>
         </a>
         </li>
@@ -168,12 +168,12 @@
                 
                 -->
                 <!-- Post Title -->
-				<h1 class="posttitle">Self-hosted password manager</h1> 
+				<h1 class="posttitle">REST is not a standard</h1> 
 
                 <!-- Post Date -->
                 <!-- <p>
                 <small>
-                    <span class="post-date"><time class="post-date" datetime="2012-10-09">09 Oct 2012</time></span>           
+                    <span class="post-date"><time class="post-date" datetime="2020-05-20">20 May 2020</time></span>           
                     
                     </small>
                 </p>
@@ -184,58 +184,45 @@
 			</div>
 
 			<!-- Post Featured Image -->
-			<img class="featured-image img-fluid" src="http://localhost:4000/assets/images/posts/2012-10-09-self-hosted-password-manager/personal-password-manager.png" alt="Self-hosted password manager">
+			<img class="featured-image img-fluid" src="http://localhost:4000/assets/images/posts/2020-05-20-REST-is-not-a-standard/restful-not-a-standard.png" alt="REST is not a standard">
 			<!-- End Featured Image -->
 
 			<!-- Post Content -->
 			<div class="article-post">
-				<p>The most reused password used in the world is 123456. There are only a few different options when it comes to choosing your password and remembering them. We will walk through a few options for creating and storing your password. Finally, I will introduce a web based password manager that I created over a weekend as a fun project. It can be self hosted for free while providing the best parts of all the available options to store and secure your passwords.</p>
+				<p>Around 2000 the internet was largely composed of static websites. We were comfortable going to foobar.com and happy receiving HTML content back which the browser would then render. We would then click on a link of submit a button and another page would be hurled back at us. This back and forth pingpong was largely how the World Wide Web was pieced together.  In former times, large desktop computers were the primary single medium of accessing these websites. These were indeed happy and simple times, however, not as exciting and chaotic as today - just 20 years later.</p>
+
+<h2 id="the-need-for-standardiztion">The need for Standardiztion</h2>
+
+<p>To understand why we currently live in a spaghetti world of web technologies, it would be prudent to view the evolution across a few dimensions.</p>
 
 <!--excerpt_separator-->
 
-<h2 id="create-passwords-and-memorize">Create passwords and memorize</h2>
+<h5 id="medium-of-access">Medium of access</h5>
 
-<p>Humans reuse the same password and sometimes relatively simple ones. Those who are sensitive about security innovate on their password patterns. If you have a good memory, this is an option, not the best though. Attackers can extract patterns if they have access to a few of your passwords.</p>
+<p>The data from the server was only accessed by a bulky desktop. The million dollar weather app business had to develop a single web page to cater its customers. Contrast that with a VC funded sillicon valley company with a brilliant weather app idea. The first version must work seamlessly on a native IOs app, native android App, native desktop application, native laptop application, IoT device by your bedside that runs on an iPad mod and oh, finally all the different web browsers. Here is the kicker! All devices must be in sync with the cities I configured the weather for.</p>
 
-<h2 id="use-single-identity-providers">Use single identity providers</h2>
+<p>I love getting the weather notifications across 5 devices a few seconds apart!</p>
 
-<p>Single identity provider systems like <a href="http://openid.net/what-is-openid/">openId</a> should have been the norm as it provides a great way to keep your identity secure while getting access to large number of website. The adoption of this technology did not unfold the way it was envisioned. The failure can be attributed to two reasons. The need for a single company providing the identity, e.g., openId, facebookConnect. The other reason is that smaller websites would be least bothered to spend the effort to integrate with these systems which are fairly more involved that just storing salted encrypted passwords in the database.</p>
+<h5 id="attention-span">Attention Span</h5>
 
-<h2 id="master-password-with-hosted-service">Master password with hosted service</h2>
+<p>In order to keep the user engaged in 2020, you have to keep changing the content on the page they are viewing. If it is not dynamic the content will feel outdated. This necessitates the need to fetch more data from the browser as the user continues to stare at the device/app of choice.</p>
 
-<p>There are a number of companies that provide hosted and self-hosted options to secure all your passwords behind a master password. This is by far the most widely adopted option for the average security conscious person. Companies like lastpass, 1password provide this option. The only issue is that it provides the attacker a single large pot of gold. With chrome extensions provided by these companies, it could result in <a href="https://blog.lastpass.com/2017/03/security-update-for-the-lastpass-extension.html/">security vulnerabilities</a>. It is well known that your data is as secure as your weakest link.</p>
+<h5 id="technology-standardization">Technology Standardization</h5>
 
-<p>Those who are uncomfortable with hosted solutions, can opt for self-hosted solutions. For individuals it can be expensive for no clear ROI.</p>
+<p>In late 1990s we saw browser wars where their capabilities allowed innovation but left us with a largely broken ecosystem - a feature would work in internet explorer but not on netscape. Standardization bodies like the IETF, W3C and the now ceased The Web Standards Project did standardize the aspects of the infrastructure powering the internet - html, javascript, protocol like HTTP, WebRTC etc, but there was never success in standardizing the “application layer”. This of “application layer” as the “what” and the technology standardizations as the “how”.</p>
 
-<p>One of the free option to store your own password vault is using keepassX<a href="http://www.keepassx.org/">2</a>. It is a great software that has good support across all platforms, both mobile and desktop. The main issue of this system is synchronization of passwords file. I have had situations where the file got corrupted while synchronizing it using dropbox.</p>
+<p>What you speak (actual applications you build)
+Grammar with allowed variations (REST)
+Words (application protocols HTTP, HTTP2, )
+Letters (network protocol)</p>
 
-<h2 id="best-of-all-options">Best of all options</h2>
+<p>To solve the attention span, the medium of access -  XMLHttpRequest (XHR) in browsers in the mid 2000’s was a huge win for the Web Platform. This allowed a browser to speak multiple requests to the server and fetch the information they need without reloading the entire view. This gave birth to APIs.  APIs became the contract between the backend and the frontend systems to “transfer state”.</p>
 
-<p>None of the above options seem perfect. The ideal system should have the best features of all those systems. It should be free, should not be the single stop pot of gold for hackers and should not lock us into a single provider (like openID).</p>
+<h2 id="rest-was-born">REST was born</h2>
 
-<p>This led me to create my own <a href="https://github.com/HackingHabits/PersonalPasswordManager">password manager</a> that can be self hosted on any free providers like heroku or google app engine. This provides the necessary flexibility of having a web based service that is secure and free, that almost no one but you would know even exists.</p>
+<p>In 2000 Roy fielding proposed “Representational State Transfer” as a principled approach to transfer state from the backend to the frontend. As with all proposals, a good number of it was followed, along the way, we discovered and modified things as required.</p>
 
-<p>The implementation has a UI that encrypts the password using your master password and <a href="https://bitwiseshiftleft.github.io/sjcl/">Stanford Javascript Crypto Library</a>. The backend is a python <a href="http://flask.pocoo.org/">Flask</a> application that receives an already encrypted password via https and just stores it in the backend in a blob store. Here is the UI of the application.</p>
-
-<p><img src="/assets/images/posts/2012-10-09-self-hosted-password-manager/password-manager.png" alt="self hosted password manager" width="336px" /></p>
-
-<p>I did not spend time optimizing the specific crypto technique as I was more focused on getting the application to work end to end over the weekend. I am sure there will be opportunities to improve on the specific crypto options.</p>
-
-<p>In order to lookup/store passwords:</p>
-<ol>
-  <li>you must be logged in into your google account.</li>
-  <li>you must also know your mater password.</li>
-</ol>
-
-<p>I have been fairly happy with the functionality is has been providing me with the layers of security. You can optionally configure it such that you would not need your google account to be logged in.</p>
-
-<h2 id="guide-to-have-one-of-your-own-hosted-password-manager">Guide to have one of your own hosted password manager</h2>
-<ul>
-  <li><a href="https://github.com/HackingHabits/PersonalPasswordManager">Github Source</a></li>
-  <li><a href="http://www.slideshare.net/hackinghabits/personal-passwordmanager-installation-14646084">Slideshare – Installation guide</a></li>
-  <li><a href="http://www.slideshare.net/hackinghabits/password-manager-howtoguide">Slideshare – How to guide</a></li>
-</ul>
-
+<p>REST was originally a guidance, the foundational pieces were concrete but the final implementation was open ended. As an analogy, REST provides us parts and components and some suggestions, but nothing stops us from reinventing the wheel - literally. Imagine we provide the following proposal, a car has a steering wheel which should control the wheels. There should be three or four wheels. There should be three pedals controlling clutch, gear and the brakes. One can imagine how many types of cars would be innovated which fit the proposal. REST has evolved in somewhat in that direction. The basic constructs of URL, Query params, post params, HTTP Method, Some standard headers are available, but when the rubber hits the road (keeping the car analogy), every API is a snowflake. Knowing one company’s API does not automatically translate to using another company’s API.</p>
 
 			</div>
                 
@@ -269,8 +256,8 @@
             <!-- Prev/Next -->
             <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
             
+            <a class="prev d-block col-md-6" href="http://localhost:4000/software/2012/10/09/self-hosted-password-manager.html"> &laquo; Self-hosted password manager</a>
             
-            <a class="next d-block col-md-6 text-lg-right" href="http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html">REST is not a standard &raquo; </a>
             
             <div class="clearfix"></div>
             </div>

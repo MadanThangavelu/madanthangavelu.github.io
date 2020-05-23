@@ -243,9 +243,9 @@ License: https://www.wowthemes.net/freebies-license/
 }
  .article-post {
      font-family:Merriweather;
-     font-size:1.1rem;
+     font-size:1.2rem;
      line-height:1.84;
-     color:rgba(0,0,0,.8);
+     color:rgba(0,0,0,.7);
 }
  blockquote {
      border-left:4px solid #00ab6b;
@@ -539,6 +539,7 @@ License: https://www.wowthemes.net/freebies-license/
  .article-post .h1, .article-post .h2, .article-post .h3, .article-post .h4, .article-post .h5, .article-post .h6, .article-post h1, .article-post h2, .article-post h3, .article-post h4, .article-post h5, .article-post h6 {
      font-weight: 700;
      margin-bottom: 1.5rem;
+     color: #000;
 }
  .article-post img.shadow {
      -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.30);
@@ -591,7 +592,7 @@ License: https://www.wowthemes.net/freebies-license/
          padding:0;
          height:350px;
          border-radius:0;
-         background-image: url(../images/jumbotron.jpg);
+         background-image: url(../images/jumbotron.png);
          background-size:cover;
     }
      .jumbotron.fortags .col-md-4 {
@@ -606,7 +607,7 @@ License: https://www.wowthemes.net/freebies-license/
          margin-top: 3rem;
          padding:0;
          border-radius:0;
-         background-image: url(../images/jumbotron.jpg);
+         background-image: url(../images/jumbotron.png);
          background-size:cover;
 }
  .jumbotron.fortags a {

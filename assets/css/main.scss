@@ -12,3 +12,31 @@
 @import
 	"syntax"
 ;
+
+.PageNavigation {
+    a {
+        
+    }
+}
+
+.article-post {
+    h2 {
+        margin-top: 60px;
+    }    
+
+    a {
+        color: rgba(0,0,0,.7);
+        word-break: break-word;
+        -webkit-box-shadow: #3eb0ef 0 -1px 0 inset;
+        box-shadow: inset 0 -1px 0 #3eb0ef;
+    }
+
+    a:hover {
+        color: #3eb0ef;
+        text-decoration: none;
+    }
+}
+
+.featured-image {
+    margin-bottom: 100px;   
+}
