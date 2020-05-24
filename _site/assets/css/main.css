@@ -197,6 +197,10 @@
   .highlight .il {
     color: #009999; }
 
+.center-image {
+  margin: 0 auto;
+  display: block; }
+
 .bg-lightblue {
   background: #e8f3ec !important; }
 
@@ -219,6 +223,9 @@
 .article-post a:hover {
   color: #3eb0ef;
   text-decoration: none; }
+
+.readingtime {
+  color: rgba(0, 0, 0, 0.54); }
 
 .featured-image {
   margin-bottom: 100px; }

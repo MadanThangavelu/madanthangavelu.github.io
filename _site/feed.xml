@@ -5,8 +5,8 @@
     <description>A technical blog by Madan Thangavelu</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 23 May 2020 09:54:59 -0700</pubDate>
-    <lastBuildDate>Sat, 23 May 2020 09:54:59 -0700</lastBuildDate>
+    <pubDate>Sat, 23 May 2020 17:28:06 -0700</pubDate>
+    <lastBuildDate>Sat, 23 May 2020 17:28:06 -0700</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -104,7 +104,7 @@ Letters (network protocol)&lt;/p&gt;
 
 &lt;p&gt;The implementation has a UI that encrypts the password using your master password and &lt;a href=&quot;https://bitwiseshiftleft.github.io/sjcl/&quot;&gt;Stanford Javascript Crypto Library&lt;/a&gt;. The backend is a python &lt;a href=&quot;http://flask.pocoo.org/&quot;&gt;Flask&lt;/a&gt; application that receives an already encrypted password via https and just stores it in the backend in a blob store. Here is the UI of the application.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2012-10-09-self-hosted-password-manager/password-manager.png&quot; alt=&quot;self hosted password manager&quot; width=&quot;336px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2012-10-09-self-hosted-password-manager/password-manager.png&quot; alt=&quot;self hosted password manager&quot; width=&quot;336px&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I did not spend time optimizing the specific crypto technique as I was more focused on getting the application to work end to end over the weekend. I am sure there will be opportunities to improve on the specific crypto options.&lt;/p&gt;
 

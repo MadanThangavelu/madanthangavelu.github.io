@@ -36,7 +36,7 @@ This led me to create my own [password manager][1] that can be self hosted on an
 
 The implementation has a UI that encrypts the password using your master password and [Stanford Javascript Crypto Library][7]. The backend is a python [Flask][4] application that receives an already encrypted password via https and just stores it in the backend in a blob store. Here is the UI of the application.
 
-![self hosted password manager](/assets/images/posts/2012-10-09-self-hosted-password-manager/password-manager.png){:width="336px"}
+![self hosted password manager](/assets/images/posts/2012-10-09-self-hosted-password-manager/password-manager.png){:width="336px"}{: .center-image }
 
 I did not spend time optimizing the specific crypto technique as I was more focused on getting the application to work end to end over the weekend. I am sure there will be opportunities to improve on the specific crypto options.
 

@@ -37,7 +37,9 @@ post_class: post-template
                 -->
                 <!-- Post Title -->
 				<h1 class="posttitle">{{ page.title }}</h1> 
-
+                <div class="readingtime">
+                    {% include readingtime.html %}
+                </div>
                 <!-- Post Date -->
                 <!-- <p>
                 <small>
