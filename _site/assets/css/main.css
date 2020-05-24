@@ -210,6 +210,9 @@
 .jumbotron.fortags {
   background-image: none; }
 
+.avatar-image {
+  border-radius: 50%; }
+
 #comments {
   margin-top: 130px; }
 
@@ -220,6 +223,8 @@
   word-break: break-word;
   -webkit-box-shadow: #3eb0ef 0 -1px 0 inset;
   box-shadow: inset 0 -1px 0 #3eb0ef; }
+.article-post strong {
+  color: #000; }
 .article-post a:hover {
   color: #3eb0ef;
   text-decoration: none; }
