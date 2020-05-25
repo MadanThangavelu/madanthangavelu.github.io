@@ -46,6 +46,10 @@
 }
 
 .article-post {
+    h5 {
+        margin-top:40px;
+        margin-bottom: 15px;
+    }
     h2 {
         margin-top: 60px;
     }    
@@ -64,6 +68,41 @@
     a:hover {
         color: #3eb0ef;
         text-decoration: none;
+    }
+
+    table{
+        border-collapse: collapse;
+        border-spacing: 0;
+        border:2px solid #efefef;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    th{
+        border:2px solid #efefef;
+        padding: 10px;
+        background-color: #e8f3ec;
+    }
+
+    td{
+        border:1px solid #efefef;
+        padding: 20px;
+    }
+
+    .success {
+        background-color: #28a745;
+    }
+
+    .warning {
+        background-color: #ffc107;
+    }
+
+    .danger {
+        background-color: #dc3545;
+    }
+
+    .text-padding {
+        padding: 5px;
     }
 }
 

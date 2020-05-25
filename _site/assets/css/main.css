@@ -216,6 +216,9 @@
 #comments {
   margin-top: 130px; }
 
+.article-post h5 {
+  margin-top: 40px;
+  margin-bottom: 15px; }
 .article-post h2 {
   margin-top: 60px; }
 .article-post a {
@@ -228,6 +231,27 @@
 .article-post a:hover {
   color: #3eb0ef;
   text-decoration: none; }
+.article-post table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 2px solid #efefef;
+  margin-top: 50px;
+  margin-bottom: 50px; }
+.article-post th {
+  border: 2px solid #efefef;
+  padding: 10px;
+  background-color: #e8f3ec; }
+.article-post td {
+  border: 1px solid #efefef;
+  padding: 20px; }
+.article-post .success {
+  background-color: #28a745; }
+.article-post .warning {
+  background-color: #ffc107; }
+.article-post .danger {
+  background-color: #dc3545; }
+.article-post .text-padding {
+  padding: 5px; }
 
 .readingtime {
   color: rgba(0, 0, 0, 0.54); }
