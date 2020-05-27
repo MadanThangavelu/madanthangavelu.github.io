@@ -8,21 +8,20 @@ comments: false
 
 **<center>Hi, I'm Madan Thangavelu</center>**
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome to my space. This website is a collection of ideas and essays that cover technical topics on running large internet companies. My focus revolves around the wisdom that comes from technology implementations in practice and not on aspirational text book definitions of technology.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome and thank you for your time! I have been drawn to technology since 2000. Over the last 5 years, I have spent my time in management.
 
-If you like hacker news, high scalability like blogs, you will likely resonate with the content of this blog.
+The belief that engineering leaders have all the information they need before they act is not quite true in practice. 
+
+As I interacted with other engineering leaders, I noticed that everyone seems to be re-discovered the art of technical management from scratch. Perhaps some sharing will help a broader community learn faster.
+
+We need to peek through the cracks and the imperfections of technology and management that anyone hardly talks about. This blog is an attempt at doing that.
+
 
 My hand picked **articles** include [REST is not a standard][1] and [An opinionated REST URL design][2].
 
 I am a **speaker** at tech conferences. Here is a link to a talk on lessons from [building an API management platform][3] and [building magical/responsive user experiences on cellular networks][4].
 
-**My goal** is to help engineers and managers realize that technology is all about tradeoffs, both in technical and non-technical areas. 
-
-> Engineering tradeoffs are what brings creativity to what we do.
-
- In some small way I would like to unveil the hood covering the *less than perfect* technical and non-technical machinery that powers your favorite internet company.
-
-You can also find me on twitter.
+Finally, In some small way I would like to unveil the hood covering the *less than perfect* technical and management machinery that powers your favorite internet company.
 
 &nbsp;
 

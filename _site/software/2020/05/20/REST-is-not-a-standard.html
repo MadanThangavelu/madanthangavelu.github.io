@@ -6,7 +6,7 @@
     
 <link rel="icon" href="/assets/images/logo.png">
     
-<title>REST is outdated, yet we live with it | Hacking Habits</title>
+<title>REST API guidelines are outdated and insufficient - are you ready for it? | Hacking Habits</title>
     
 <meta name="description" content="A quick overview on why REST is outdated and does not solve the business problems today. We are ariving closed to the need to invent something new."> 
     
@@ -117,7 +117,7 @@
     </p>
     <ul>
         <li class="ml-1 mr-1">
-        <a target="_blank" href="https://twitter.com/intent/tweet?text=REST is outdated, yet we live with it&url=http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <a target="_blank" href="https://twitter.com/intent/tweet?text=REST API guidelines are outdated and insufficient - are you ready for it?&url=http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
         <i class="fab fa-twitter"></i>
         </a>
         </li>
@@ -168,11 +168,11 @@
                 
                 -->
                 <!-- Post Title -->
-				<h1 class="posttitle">REST is outdated, yet we live with it</h1> 
+				<h1 class="posttitle">REST API guidelines are outdated and insufficient - are you ready for it?</h1> 
                 <div class="readingtime">
                     
 
-13 min read
+12 min read
 
                 </div>
                 <!-- Post Date -->
@@ -189,40 +189,52 @@
 			</div>
 
 			<!-- Post Featured Image -->
-			<img class="featured-image img-fluid" src="http://localhost:4000/assets/images/posts/2020-05-20-REST-is-not-a-standard/restful-not-a-standard.png" alt="REST is outdated, yet we live with it">
+			<img class="featured-image img-fluid" src="http://localhost:4000/assets/images/posts/2020-05-20-REST-is-not-a-standard/restful-not-a-standard.png" alt="REST API guidelines are outdated and insufficient - are you ready for it?">
 			<!-- End Featured Image -->
 
 			<!-- Post Content -->
 			<div class="article-post">
-				<p>The internet was largely composed of static websites around 2000. Visiting a website like foobar.com/some/path would return HTML content back which the browsers knew how to render. The only action one could do on the page was to click on a link, an action that hurdled back another page at us from the web server. This back and forth pingpong was largely how the World Wide Web was pieced together.</p>
+				<p>A year after your project execution you realize that the APIs are messy and inconsistent. Things looked good when you started the project, so where did you go wrong? Was it you or was it REST?</p>
 
-<p>In yestertimes, large desktop computers were the primary single medium of accessing these websites. These were indeed happy and simple times, however, not as exciting and chaotic as today - just 20 years later.</p>
+<h2 id="why-did-we-invent-rest-apis">Why did we invent REST APIs?</h2>
 
-<p>Yahoo homepage in 2000 loaded minimal html with static content, but the 2020 website has infinite scrolling, rotating news, covid updates, dynamically rotating advertisement and a dynamic trending news section and much more. The technologies &amp; architectures that supported the website in 2000 are arguably fall short for the current needs.</p>
+<p>The internet was largely composed of static websites around 2000. Visiting a website like foobar.com/some/path would return HTML content back which the browsers knew how to render.</p>
+
+<p>You clicked and the server hurdled back another new page. This back and forth pingpong was largely how the World Wide Web was pieced together.</p>
+
+<p>These were indeed happy and simple times, however, not as exciting and chaotic as today - just 20 years later.</p>
+
+<p>Yahoo homepage in 2000 loaded minimal html with static content, but the 2020 website has <em>infinite scrolling, rotating news, covid updates, dynamically rotating advertisement and a dynamic trending news section and much more</em>. We also went from large desktop computers to IoTs.</p>
 
 <p><img src="/assets/images/posts/2020-05-20-REST-is-not-a-standard/yahoo-comparision.png" alt="yahoo website in 2000" class="center-image" /></p>
 
-<h2 id="growth-in-complexity">Growth in complexity</h2>
-
-<p>Let us look at a few such dimensions of growth that influenced the application layer development of www the most in the more recent years.</p>
+<p>A number of things influenced the application layer development.</p>
 
 <h5 id="medium-of-access">Medium of access</h5>
 
-<p>The data from the server was only accessed by a desktop previously. The million dollar weather app business in 2000 had to develop a single web page to cater its customers. Contrast that with a VC funded silicon valley company with a brilliant weather app idea. The first version must work seamlessly on a native IOs app, native android App, native desktop application, native laptop application, IoT device by your bedside that runs on an iPad mod and oh, finally all the different web browsers. Here is the kicker! All devices must be in sync with the cities I configured the weather for.</p>
+<p>Your million dollar weather app business in 2000 had a single web page to serve to your customers through their desktops.</p>
 
-<p>btw, I love getting the weather notifications across 5 devices a few seconds apart! - Not</p>
+<p>Contrast that to this day - a VC funded silicon valley company with a brilliant weather app. The first version works seamlessly on a native IOs app, native android App, native desktop application, native laptop application and on IoT device by your bedside that runs on an iPad like device and oh … finally all the different web browsers. Here is the kicker!</p>
+
+<p>All devices must be in sync with the cities I configured the weather. Who does’t love getting weather notifications across 5 devices a few seconds apart!</p>
 
 <h5 id="not-a-one-person-job">Not a one person job</h5>
 
-<p>A single company might find it hard to build all competencies that their customers need. In the example of yahoo, the weather app is likely developed by another third party company that yahoo has no control over. This is also true of how large companies with 10K developers.</p>
+<p>The apps are so rich that sometimes, a single company might not be powering all the data that a customer sees.</p>
+
+<p>In the example of yahoo, the weather app is likely developed by another third party company that yahoo has no control over. This is also true of large companies with thousands of engineers too.</p>
 
 <h5 id="languages-and-development-frameworks">Languages and Development Frameworks</h5>
 
-<p>The development languages of website have also travelled through various phases. CGI scripts, PHP, JAVA, Ruby, Python, C#, Golang, Rust, Node.js and many. The app now had to find a way to interact with servers written in different languages.</p>
+<p>App development could happen in swift, objectiveC, Javascript, C#, Java.</p>
+
+<p>Server might be running in CGI scripts, PHP, JAVA, Ruby, Python, C#, Golang, Rust, Node.js and others.</p>
+
+<p>We have to make them all understand each other.</p>
 
 <h2 id="the-internet-standards-pyramid">The Internet standards pyramid</h2>
 
-<p>A key cornerstone requirement for the web of the future turned out to be “interoperability”. In order for different devices, teams, languages to interact, they need to understand each other.</p>
+<p>Interoperability - A cornerstone requirement for the web to function. In order for different devices, teams, languages to interact, they need to understand each other.</p>
 
 <p>Standards allows the interoperability of multiple devices developed by different teams to interact with multiple web services written in different languages. Some ideas become concrete enough to become a true standard, while others die trying.</p>
 
@@ -232,25 +244,28 @@
 
 <p>HTML or HTTP is one tiny piece of the puzzle. If you think about all the technologies that are needed for your cat video to show up, it is truly incredible. Along the layers of technology stack, there are numerous standardizations.</p>
 
-<p><img src="/assets/images/posts/2020-05-20-REST-is-not-a-standard/standards-pyramid.png" alt="standards pyramid" class="center-image" /></p>
-
 <h5 id="application-layer-standardization">Application layer standardization</h5>
 
-<p>Enforcing standards are hard where there is room for a lot of creativity. The bottom most layers of the pyramid describe the “how” something functions. Most engineers do not delve to that level during a normal day or product development. If someone deviates from the spec/standard or DNS, there is change the internet is not going to work. However at highest layers, the ability to be creative exists. It is really hard to set an exact spec/standard on a website layout. One may prescribe the accepted colors, the tone of the copy, sections and a few more things. If the job of developing a website layout is given to two engineers with the above specs on colors, tone and sections, they will likely come up with two completely different looking websites. Same is true for REST APIs. Let us get into what REST is and how it has failed us but it survives us too.</p>
+<p><img src="/assets/images/posts/2020-05-20-REST-is-not-a-standard/standards-pyramid.png" alt="standards pyramid" class="center-image" /></p>
+
+<p>Enforcing standards are hard where there is room for a lot of creativity. The bottom most layers of the pyramid above provide relatively less creative space. 
+Most engineers do not delve to that level during a normal day or product development.</p>
+
+<p>If you deviate from the spec/standard of DNS, there is change the internet is not going to work.</p>
+
+<p>However, the highest layers are areas of creative playground. It is really hard to set an exact spec/standard on a website layout. One may prescribe the accepted colors and tone of the copy. But the final outcome from two developers will be different.</p>
+
+<p>Same is true for REST APIs. Let us get into what REST is and how it has failed us but it survives us too.</p>
 
 <h2 id="introduction-of-rest">Introduction of REST</h2>
 
-<p>While APIs have existed even before the formalization of HTTP in 1997. XMLHttpRequest (XHR) in browsers in the mid 2000’s was a pivotal moment when APIs became mainstream. This allowed a browsers to speak multiple requests to the server and fetch the information they need without reloading the entire view. This essentially gave birth to the the now commonly known term web APIs. APIs became the contract between the backend and the frontend systems to “transfer state”.</p>
+<p>While APIs have existed even before the formalization of HTTP in 1997. XMLHttpRequest (XHR) in browsers in the mid 2000’s was a pivotal moment when APIs became mainstream. This allowed a browsers to speak multiple requests to the server and fetch the information they need without reloading the entire view. This essentially gave birth to the the now commonly known term web APIs.</p>
+
+<p>APIs became the contract between the backend and the frontend systems to “transfer state”.</p>
 
 <p>HTTP was already providing the core component of data transfer protocol between server and client. The primary anatomy of a HTTP had 3 components</p>
 
-<ul>
-  <li>The URI - a path that identifies what a client wants. E.g., /houses/zip/95349</li>
-  <li>Headers -  A set of key value parameters that can be transmitted</li>
-  <li>Body - content of information</li>
-</ul>
-
-<p>Representational State Transfer (REST) was an architectural proposal of how to use the 3 HTTP components to create some uniformity in semantics when building business applications that represent server state on the client.</p>
+<p>Representational State Transfer (REST) was an architectural proposal of how to use the 3 HTTP components (uri, header, body) to create some uniformity when building business applications that represent server state on the client.</p>
 
 <p>REST was introduced In 2000 by Roy fielding as part of a PHD thesis.</p>
 
@@ -317,9 +332,11 @@
     </tbody>
 </table>
 
-<p>The promise of each of these principles were only partially fulfilled. REST provides us parts and components and some suggestions, but nothing stops us from reinventing the wheel or REST is straight up not a good fit. If we drew up the needs of the business and what REST satisfies, it a small subset.</p>
+<h2 id="shortcomings-of-rest-apis">Shortcomings of REST APIs</h2>
 
-<p>I do not even think REST set out to be the all encompassing standards or guidance for building the business application. We have just embraced it blindly to be that. This misunderstanding is resulting in blog posts like this.</p>
+<p>The promise of each of these principles were only partially fulfilled. REST provides us parts and components and some suggestions, but nothing stops us from reinventing the wheel or REST is straight up not a good fit. If we drew up the needs of the business and what REST satisfies, it’s a small subset.</p>
+
+<p>REST did not aspire to be an all encompassing standards or guidance for building the business application. We have just embraced it blindly to be that.</p>
 
 <p><img src="/assets/images/posts/2020-05-20-REST-is-not-a-standard/http-rest-business-overlap.png" alt="rest api standards" class="center-image" /></p>
 
@@ -340,15 +357,15 @@
   <li><strong>Versioning</strong> -  No one has come to terms with one approach that is easy and has meaning. Unlike server for software, versioning is not as easy in APIs as it spans multiple dimensions like schema, logic.</li>
 </ul>
 
-<h5 id="the-truth-underlying-rest">The Truth underlying REST</h5>
+<h5 id="guarantees-in-a-rest-api">Guarantees in a REST API</h5>
 
 <p>When using REST, here are the lowest common denominator that you can safely assume. Anything beyond the following assumption could anytime turn out to be a lie.</p>
 
 <ul>
-  <li>URL - Do not assume the semantic meaning. Use it just to locate the handler function</li>
+  <li><strong>URL</strong> - Do not assume the semantic meaning. Use it just to locate the handler function</li>
   <li><strong>GET</strong> - All parameters are in the URL and headers</li>
   <li><strong>POST</strong> - Parameters can be in URL, header and body</li>
-  <li><strong>Never interpret 400, 500, or 200 as any business semantics</strong> - Always just assume they are system (client, server) issues. Introspect how business errors are surfaced in the specific implementation as it will be different between different projects.</li>
+  <li><strong>Never assume 400, 500, or 200 as business semantics</strong> - Always just assume they are system (client, server) issues. Introspect how business errors are surfaced in the specific implementation as it will be different between different projects.</li>
 </ul>
 
 <h2 id="conclusion">Conclusion</h2>
