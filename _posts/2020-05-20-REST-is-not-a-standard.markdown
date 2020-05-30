@@ -2,7 +2,7 @@
 layout: post
 title: "REST API guidelines are outdated and insufficient"
 author: madan
-categories: [ Software]
+categories: [Software]
 featured: true
 description: A quick overview on why REST is outdated and does not solve the business problems today. We are ariving closed to the need to invent something new.
 image: /assets/images/posts/2020-05-20-REST-is-not-a-standard/restful-not-a-standard.png
