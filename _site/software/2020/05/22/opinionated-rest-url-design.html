@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+<link rel="icon" href="/assets/images/logo.png">
+    
+<title>REST URL design - An opinionated list of best practices | Hacking Habits</title>
+    
+<meta name="description" content="A quick overview on why REST is not a standard but merely an architectural style that most of us use but do not understand."> 
+    
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    
+<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+    
+<link href="/assets/css/screen.css" rel="stylesheet">
+    
+<link href="/assets/css/main.css" rel="stylesheet">
+
+<head profile="http://www.w3.org/2005/10/profile">
+<link rel="icon" 
+      type="image/png" 
+      href="/assets/images/favicon.ico" />
+
+</head>
+    
+
+    
+
+<body class="layout-post">
+
+    
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    
+    <div class="container pr-0">    
+    
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/">
+    <img src="/assets/images/logo.png" alt="Hacking Habits">
+    </a>
+    <!-- End Logo -->
+  
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+       
+        <!-- Begin Menu -->
+        
+            <ul class="navbar-nav ml-auto">
+                
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/index.html">Blog</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/about">About</a>
+                </li>
+                
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.facebook.com/hackinghabits/"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                
+                <li class="nav-item">
+                <a target="_blank"  class="nav-link" href="https://twitter.com/hackinghabits"><i class="fab fa-twitter"></i></a>
+                </li>
+                
+            </ul>		
+  
+        <!-- End Menu -->
+
+    </div>
+        
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+    
+<div class="site-content">   
+<div class="container">
+    
+<!-- Site Title
+================================================== -->
+<!-- <div class="mainheading">
+    <h1 class="sitetitle">Hacking Habits</h1>
+    <p class="lead">
+         A technical blog by Madan Thangavelu
+    </p>
+</div> -->
+
+    
+    
+<!-- Content
+================================================== --> 
+<div class="main-content">
+    <!-- Begin Article
+================================================== -->
+<div class="container">
+	<div class="row">
+
+		<!-- Post Share -->
+		<div class="col-md-2 pl-0">            
+           <div class="share">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+        <a target="_blank" href="https://twitter.com/intent/tweet?text=REST URL design - An opinionated list of best practices&url=http://localhost:4000/software/2020/05/22/opinionated-rest-url-design.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <i class="fab fa-twitter"></i>
+        </a>
+        </li>
+        
+        <li class="ml-1 mr-1">
+        <a target="_blank" href="https://facebook.com/sharer.php?u=http://localhost:4000/software/2020/05/22/opinionated-rest-url-design.html" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+        <i class="fab fa-facebook-f"></i>
+        </a>
+        </li>
+        
+        <li class="ml-1 mr-1">
+        <a target="_blank" href="https://plus.google.com/share?url=http://localhost:4000/software/2020/05/22/opinionated-rest-url-design.html" onclick="window.open(this.href, 'facebook-google', 'width=550,height=435');return false;">
+        <i class="fab fa-google"></i>
+        </a>
+        </li>
+        
+    </ul>
+    
+    <div class="sep">
+    </div>				
+    <ul>
+        <li> 
+        <a  class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>  
+		</div>
+		
+
+		<!-- Post -->        
+        
+        
+		<div class="col-md-8 flex-first flex-md-unordered">
+			<div class="mainheading">
+
+                <!-- Author Box -->
+                <!-- 				
+				<div class="row post-top-meta">
+					<div class="col-md-2">
+						<img class="author-thumb" src="https://www.gravatar.com/avatar/2bf96ac5a4cd362b77c3503fedb03e92?s=250&d=mm&r=x" alt="Madan">
+					</div>
+					<div class="col-md-10">
+						<a target="_blank" class="link-dark" href="https://hackinghabits.com">Madan</a><a target="_blank" href="https://twitter.com/hackinghabits" class="btn follow">Follow</a>
+						<span class="author-description">Engineering manager @ Uber. I love building scalable API Platforms serving thousands of APIs to millions of customers each second. This blog is my way of keeping up with technology.</span>						
+					</div>
+				</div>				
+                
+                -->
+                <!-- Post Title -->
+				<h1 class="posttitle">REST URL design - An opinionated list of best practices</h1> 
+                <div class="readingtime">
+                    
+
+16 min read
+
+                </div>
+                <!-- Post Date -->
+                <!-- <p>
+                <small>
+                    <span class="post-date"><time class="post-date" datetime="2020-05-22">22 May 2020</time></span>           
+                    
+                    </small>
+                </p>
+                -->
+                <!-- End Post Date -->
+
+
+			</div>
+
+			<!-- Post Featured Image -->
+			<img class="featured-image img-fluid" src="http://localhost:4000/assets/images/posts/2020-05-22-rest-url-design/title.png" alt="REST URL design - An opinionated list of best practices">
+			<!-- End Featured Image -->
+
+			<!-- Post Content -->
+			<div class="article-post">
+				<p>REST APIs come in all flavors. A quick review of all APIs provided from twitter, facebook, google, twillio and other companies make it clear that there is no single standard. You can checkout my other post on why REST APIs are outdated.</p>
+
+<p>This article is a list of practical recommendations when developing new REST APIs design. Consider them as an oppunionated design guidance. There is no right and wrong, but pick one and stick with it.</p>
+
+<p><strong>Story line</strong></p>
+
+<ul class="slim-toc" id="markdown-toc">
+  <li><a href="#item-1--use-only-get--post" id="markdown-toc-item-1--use-only-get--post">Item 1:    Use only GET &amp; POST</a>    <ul>
+      <li><a href="#recommended" id="markdown-toc-recommended">Recommended</a></li>
+      <li><a href="#not-recommended" id="markdown-toc-not-recommended">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-2---use-patch-delete--put-only-if" id="markdown-toc-item-2---use-patch-delete--put-only-if">Item 2:     Use PATCH, DELETE &amp; PUT only if</a></li>
+  <li><a href="#item-3--casing-in-the-url" id="markdown-toc-item-3--casing-in-the-url">Item 3:    Casing in the url</a>    <ul>
+      <li><a href="#recommended-1" id="markdown-toc-recommended-1">Recommended</a></li>
+      <li><a href="#not-recommended-1" id="markdown-toc-not-recommended-1">NOT Recommended</a></li>
+      <li><a href="#some-industry-usages" id="markdown-toc-some-industry-usages">Some industry usages</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-4--do-not-have-deeplynestedurlpaths" id="markdown-toc-item-4--do-not-have-deeplynestedurlpaths">Item 4:    Do not have /deeply/nested/url/paths</a>    <ul>
+      <li><a href="#recommended-2" id="markdown-toc-recommended-2">Recommended</a></li>
+      <li><a href="#not-recommended-2" id="markdown-toc-not-recommended-2">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-5--boolean-in-query" id="markdown-toc-item-5--boolean-in-query">Item 5:    Boolean in query</a>    <ul>
+      <li><a href="#recommended-3" id="markdown-toc-recommended-3">Recommended</a></li>
+      <li><a href="#not-recommended-3" id="markdown-toc-not-recommended-3">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-6--arrays-in-query" id="markdown-toc-item-6--arrays-in-query">Item 6:    Arrays in query</a>    <ul>
+      <li><a href="#recommended-4" id="markdown-toc-recommended-4">Recommended</a></li>
+      <li><a href="#not-recommended-4" id="markdown-toc-not-recommended-4">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-7--hash-in-query" id="markdown-toc-item-7--hash-in-query">Item 7:    Hash in query</a>    <ul>
+      <li><a href="#recommended-5" id="markdown-toc-recommended-5">Recommended</a></li>
+      <li><a href="#not-recommended-5" id="markdown-toc-not-recommended-5">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-8--batch-api-vs-single-api" id="markdown-toc-item-8--batch-api-vs-single-api">Item 8:    Batch API vs Single API</a>    <ul>
+      <li><a href="#recommended-6" id="markdown-toc-recommended-6">Recommended</a></li>
+      <li><a href="#not-recommended-6" id="markdown-toc-not-recommended-6">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-9---in-query-params" id="markdown-toc-item-9---in-query-params">Item 9:    + in query params</a></li>
+  <li><a href="#item-10--sort" id="markdown-toc-item-10--sort">Item 10:    Sort</a>    <ul>
+      <li><a href="#recommended-7" id="markdown-toc-recommended-7">Recommended</a></li>
+      <li><a href="#not-recommended-7" id="markdown-toc-not-recommended-7">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-11-pagination" id="markdown-toc-item-11-pagination">Item 11:  Pagination</a>    <ul>
+      <li><a href="#recommended-8" id="markdown-toc-recommended-8">Recommended</a></li>
+      <li><a href="#not-recommended-8" id="markdown-toc-not-recommended-8">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-12--filter--exclude" id="markdown-toc-item-12--filter--exclude">Item 12:    filter &amp; exclude</a>    <ul>
+      <li><a href="#recommended-9" id="markdown-toc-recommended-9">Recommended</a></li>
+      <li><a href="#recommended-10" id="markdown-toc-recommended-10">Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-13--filter--exclude-with-logic" id="markdown-toc-item-13--filter--exclude-with-logic">Item 13:    filter &amp; exclude with logic</a>    <ul>
+      <li><a href="#recommended-11" id="markdown-toc-recommended-11">Recommended</a></li>
+      <li><a href="#not-recommended-9" id="markdown-toc-not-recommended-9">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-14--advanced-search-is-different" id="markdown-toc-item-14--advanced-search-is-different">Item 14:    Advanced /search is different</a>    <ul>
+      <li><a href="#recommended-12" id="markdown-toc-recommended-12">Recommended</a></li>
+      <li><a href="#not-recommended-10" id="markdown-toc-not-recommended-10">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-15--global-search" id="markdown-toc-item-15--global-search">Item 15:    Global search</a>    <ul>
+      <li><a href="#recommended-13" id="markdown-toc-recommended-13">Recommended</a></li>
+      <li><a href="#not-recommended-11" id="markdown-toc-not-recommended-11">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-16--reserved-urls" id="markdown-toc-item-16--reserved-urls">Item 16:    Reserved URLs</a></li>
+  <li><a href="#item-17--content-type-in-url" id="markdown-toc-item-17--content-type-in-url">Item 17:    Content type in URL</a>    <ul>
+      <li><a href="#recommended-14" id="markdown-toc-recommended-14">Recommended</a></li>
+      <li><a href="#not-recommended-12" id="markdown-toc-not-recommended-12">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-18--versioning" id="markdown-toc-item-18--versioning">Item 18:    Versioning</a>    <ul>
+      <li><a href="#logic" id="markdown-toc-logic">Logic</a></li>
+      <li><a href="#schema" id="markdown-toc-schema">Schema</a></li>
+      <li><a href="#recommended-15" id="markdown-toc-recommended-15">Recommended</a></li>
+      <li><a href="#not-recommended-13" id="markdown-toc-not-recommended-13">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-19--provide-pretty-option" id="markdown-toc-item-19--provide-pretty-option">Item 19:    Provide “pretty” option</a>    <ul>
+      <li><a href="#recommended-16" id="markdown-toc-recommended-16">Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#item-20--naming-your-resources" id="markdown-toc-item-20--naming-your-resources">Item 20:    Naming your resources</a>    <ul>
+      <li><a href="#recommended-17" id="markdown-toc-recommended-17">Recommended</a></li>
+      <li><a href="#not-recommended-14" id="markdown-toc-not-recommended-14">NOT Recommended</a></li>
+    </ul>
+  </li>
+  <li><a href="#practical-example-applying-all-items" id="markdown-toc-practical-example-applying-all-items">Practical Example applying all items</a>    <ul>
+      <li><a href="#step-1-write-down-the-top-5-interactions-a-customer-does-with-this-system" id="markdown-toc-step-1-write-down-the-top-5-interactions-a-customer-does-with-this-system">Step 1: Write down the top 5 interactions a customer does with this system</a></li>
+      <li><a href="#step-2-refine-and-consolidate" id="markdown-toc-step-2-refine-and-consolidate">Step 2: Refine and consolidate</a></li>
+      <li><a href="#step-3-finalize-root-url-paths" id="markdown-toc-step-3-finalize-root-url-paths">Step 3: Finalize root URL paths</a></li>
+      <li><a href="#step-4-provide-shortcuts-for-many-to-many-assignments" id="markdown-toc-step-4-provide-shortcuts-for-many-to-many-assignments">Step 4: Provide shortcuts for many to many assignments</a></li>
+      <li><a href="#step-5-convert-similar-urls-to-filter-sort-and-exclude" id="markdown-toc-step-5-convert-similar-urls-to-filter-sort-and-exclude">Step 5: Convert similar urls to filter, sort and exclude</a></li>
+    </ul>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ul>
+
+<h4 id="item-1--use-only-get--post">Item 1:    Use only GET &amp; POST</h4>
+
+<p>HTTP and REST spec provide a variety of request verbs like GET, POST, PATCH, PUT and DELETE.</p>
+
+<blockquote class="blockquote-success">
+
+  <h6 id="recommended">Recommended</h6>
+</blockquote>
+
+<p>If you control your callers, stick to only GET and POST HTTP methods. This is true when all the callers are internal company products. Let us look at each of the HTTP verbs and understand why I suggest you to stay away from them.</p>
+
+<blockquote class="blockquote-danger">
+
+  <h6 id="not-recommended">NOT Recommended</h6>
+</blockquote>
+
+<ul>
+  <li>PUT
+    <ul>
+      <li>
+        <p>This verb puts too much knowledge of internals to the client. The client needs to reconstruct the exact payload with all the relationships which will force the client to understand all the foreign key relationships.</p>
+      </li>
+      <li>
+        <p>Imagine you have a restaurant table backing a /restaurant object. A PUT during a name update will force you to understand the menu items foreignkeys.</p>
+      </li>
+    </ul>
+  </li>
+  <li>PATCH
+    <ul>
+      <li>Absolutely no reason to know whether it was a partial update or a full update. Infact sometimes partial updates might put your backend into a logically inconsistent state.</li>
+      <li>Imagine the restaurant patch updates the name, but new restaurant creation via POST has validationst that are not replicated into the PATCH API.</li>
+      <li>Not all frameworks implement this verb correctly. Here is an <a href="https://laravel.io/forum/02-13-2014-i-can-not-get-inputs-from-a-putpatch-request">old issue</a> from the laravel framework community. If your company is developing software on new languages or frameworks, it is better to stick with commonly used verbs.</li>
+    </ul>
+  </li>
+  <li>DELETE
+    <ul>
+      <li>This verb does <a href="https://stackoverflow.com/questions/15619075/webapi-delete-not-working-405-method-not-allowed">not support passing data via body</a>. This forces all parameters to be passed through query parameters and query parameters can sometimes be insufficient. This will result in some of your APIs using DELETE while others default back to POST resulting in inconsistencies.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="item-2---use-patch-delete--put-only-if">Item 2:     Use PATCH, DELETE &amp; PUT only if</h4>
+
+<p>If your company actively sells APIs for integrations to external vendors into your product, try to support all HTTP verbs. You may still choose to convert incoming requests to a POST before your serving layer.</p>
+
+<p>Not doing so will result in <a href="https://success.salesforce.com/ideaView?id=0873A000000PST0QAO">Cross Vendor integrations issues</a> as we see in the support ticket.</p>
+
+<h4 id="item-3--casing-in-the-url">Item 3:    Casing in the url</h4>
+
+<p>There are hand full of casing used by various companies and there appears to be no true consensus. I do recommend picking one and sticking with it.</p>
+
+<blockquote class="blockquote-success">
+
+  <h6 id="recommended-1">Recommended</h6>
+</blockquote>
+
+<ul>
+  <li><a href="https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841">/use-kebab-case</a></li>
+  <li>keep the urls characters in lowercase [0-9][a-z]</li>
+</ul>
+
+<blockquote class="blockquote-danger">
+
+  <h6 id="not-recommended-1">NOT Recommended</h6>
+</blockquote>
+
+<ul>
+  <li>/underscores_between_urls</li>
+  <li>/camelCase</li>
+  <li>Special characters outside of [0-9][a-z]</li>
+  <li>Do not use upper case in the URL (using them in query is fine)</li>
+</ul>
+
+<h6 id="some-industry-usages">Some industry usages</h6>
+<ul>
+  <li>Twitter - <a href="https://developer.twitter.com/en/docs/api-reference-index">snake case</a></li>
+  <li>Square - <a href="https://developer.squareup.com/reference/square/labor-api">kebab case</a></li>
+  <li>Google Maps - <a href="https://developers.google.com/places/web-service/query">no case</a></li>
+  <li>Stack overflow <a href="https://api.stackexchange.com/docs">kebab case</a></li>
+  <li>AWS API <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AcceptVpcEndpointConnections.html">cameCase</a></li>
+</ul>
+
+<h4 id="item-4--do-not-have-deeplynestedurlpaths">Item 4:    Do not have /deeply/nested/url/paths</h4>
+
+<p>Using pure REST semantics might force some APIs to be really nested.</p>
+
+<blockquote class="blockquote-success">
+
+  <h6 id="recommended-2">Recommended</h6>
+</blockquote>
+
+<ul>
+  <li>Max depth 2
+    <ul>
+      <li>GET or POST /area/1/restaurant/5</li>
+      <li>GET or POST /menu/6/menuitem/4</li>
+      <li>POST /menu-editor/update-menu</li>
+    </ul>
+  </li>
+  <li>Browser urls and proxies allow a max length. Set a smaller value and Respond with a 414 statuscode.</li>
+</ul>
+
+<blockquote class="blockquote-danger">
+
+  <h6 id="not-recommended-2">NOT Recommended</h6>
+</blockquote>
+
+<ul>
+  <li>/area/1/restaurant/5/menu/6/menuitem/4</li>
+</ul>
+
+<h4 id="item-5--boolean-in-query">Item 5:    Boolean in query</h4>
+
+<p>There are many ways to represent boolean as string, numbers in query, params and body. It is critical to pick one and stick with it.</p>
+
+<blockquote class="blockquote-success">
+
+  <h6 id="recommended-3">Recommended</h6>
+</blockquote>
+
+<ul>
+  <li>use “true”, “false” in query - /?active=true</li>
+  <li>use “true”, “false” in body - {“active”: true}</li>
+</ul>
+
+<h6 id="not-recommended-3">NOT Recommended</h6>
+<ul>
+  <li>“0” &amp; “1” (string) - /?active=1</li>
+  <li>0 &amp; 1 (int) - {“active”: 1}</li>
+</ul>
+
+<h4 id="item-6--arrays-in-query">Item 6:    Arrays in query</h4>
+<p>There are times when you would want to pass an array to the server using a GET request. Pick one to stick with it.</p>
+
+<blockquote class="blockquote-success">
+
+  <h6 id="recommended-4">Recommended</h6>
+</blockquote>
+
+<ul>
+  <li>/?key[]=1&amp;key[]=2</li>
+</ul>
+
+<h6 id="not-recommended-4">NOT Recommended</h6>
+<ul>
+  <li>/?keys[]=1&amp;keys[]=2 (note plural)</li>
+  <li>/?key=1&amp;key=2</li>
+  <li>/?key=1,2</li>
+  <li>/?key=[1,2]</li>
+</ul>
+
+<h4 id="item-7--hash-in-query">Item 7:    Hash in query</h4>
+<p>Although relatively rare, there are times when you would want to pass a dictionary to the server using a GET request. Pick one to stick with it.</p>
+
+<blockquote class="blockquote-success">
+
+  <h6 id="recommended-5">Recommended</h6>
+</blockquote>
+
+<ul>
+  <li>/person?details.age=5&amp;details.gender=male</li>
+</ul>
+
+<h6 id="not-recommended-5">NOT Recommended</h6>
+<ul>
+  <li>/person?details[age]=5&amp;details[gender]=male</li>
+  <li>url encoded string - /person?hash=details%5Bage%5D%3D5</li>
+  <li>multi level nesting - details.age.birthyear</li>
+</ul>
+
+<h4 id="item-8--batch-api-vs-single-api">Item 8:    Batch API vs Single API</h4>
+<p>Very often your APIs start with returning a single item and operating on a single item. As performance bottlenecks arise, there will be a need for a bulk api. If you stick with this plan, you will not have to double implement a shim everytime you need a bulk operation on an existing API.</p>
+
+<blockquote class="blockquote-success">
+
+  <h6 id="recommended-6">Recommended</h6>
+</blockquote>
+
+<ul>
+  <li>Collection - /menu-items</li>
+  <li>Getting a single Resource - /menu-items/a</li>
+  <li>/menu/remove-items?id[]=20&amp;id[]=30</li>
+</ul>
+
+<h6 id="not-recommended-6">NOT Recommended</h6>
+<ul>
+  <li>Collection - /bulk-menu-items or /all-menu-items</li>
+  <li>Getting a single resource with - /menu-item</li>
+  <li>/menu/remove-item?id[]=20&amp;id[]=30 (note singlar name remove-item)</li>
+</ul>
+
+<h4 id="item-9---in-query-params">Item 9:    + in query params</h4>
+<p>”+” is a special character that can be used in query. When used, your query will replace the “+” for a “space” when the query is read.</p>
+
+<ul>
+  <li>/books?q=a+5 server reads as “a 5”</li>
+  <li>/books?q=a+++++5 server reads as “a     5”</li>
+</ul>
+
+<p>This will be handy in cases like sort, as we will see in the next item.</p>
+
+<h4 id="item-10--sort">Item 10:    Sort</h4>
+<p>Across all APIs use a standard query, body field name for sorting operations. Use the DESC and ASC keywords.</p>
+
+<blockquote class="blockquote-success">
+
+  <h6 id="recommended-7">Recommended</h6>
+</blockquote>
+
+<ul>
+  <li>/books?<strong>sort[]</strong>=title<strong>+DESC</strong>&amp;sort[]=author+ASC</li>
+</ul>
+
+<h6 id="not-recommended-7">NOT Recommended</h6>
+<ul>
+  <li>/menu?<strong>sort</strong>=title&amp;<strong>desc</strong>=title or ?<strong>sort</strong>=title&amp;<strong>asc</strong>=author</li>
+  <li>/menu?<strong>sortby</strong>=itemname</li>
+</ul>
+
+<h4 id="item-11-pagination">Item 11:  Pagination</h4>
+<p>Almost all APIs returning a list needs pagination once the length of the return data is more than a few hundreds.</p>
+
+<blockquote class="blockquote-success">
+
+  <h6 id="recommended-8">Recommended</h6>
+</blockquote>
+
+<ul>
+  <li>/menuitems?offset=5&amp;limit=10</li>
+</ul>
+
+<h6 id="not-recommended-8">NOT Recommended</h6>
+<ul>
+  <li>/menuitems?page[number]=5&amp;page[size]=10</li>
+  <li>Doing the pagination through headers
+    <ul>
+      <li>Content-Range</li>
+      <li>Accept-Range</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="item-12--filter--exclude">Item 12:    filter &amp; exclude</h4>
+<p>A number of times you would want to filter (select) or exclude (unselect) the response data based on certain parameters. In those cases, reserve special query parameters.</p>
+
+<blockquote class="blockquote-success">
+
+  <h6 id="recommended-9">Recommended</h6>
+</blockquote>
+
+<ul>
+  <li>/menu-items?filter=key:value</li>
+  <li>/menu-items?filter=ingredient:tomatoes</li>
+  <li>/menu-items?filter[]=ingredient:tomatoes&amp;filter[]=size:xl</li>
+</ul>
+
+<p>There are cases where you will have to use lte, gte to represent ‘less than equal’ and ‘greater than equal’. In those cases the following is recommended.</p>
+
+<h6 id="recommended-10">Recommended</h6>
+<ul>
+  <li>/menu-items?filter=key<strong>_lte</strong>:value</li>
+  <li>/menu-items?filter=price<strong>_lte</strong>:117</li>
+  <li>/menu-items?filter=price<strong>_gte</strong>:117</li>
+</ul>
+
+<h4 id="item-13--filter--exclude-with-logic">Item 13:    filter &amp; exclude with logic</h4>
+
+<p>There are also caess where we will need boolean operations for our filters. In those cases we will have to introduce boolean operations into the filter query.</p>
+
+<blockquote class="blockquote-success">
+
+  <h6 id="recommended-11">Recommended</h6>
+</blockquote>
+
+<table>
+    <colgroup>
+        <col width="30%" />
+        <col width="70%" /> </colgroup>
+    <thead>
+        <tr class="header">
+            <th>Logic</th>
+            <th>Query</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                A &amp;&amp; B
+            </td>
+            <td>
+                filter[]=key:A&amp;filter[]=key<strong>_and</strong>:B
+            </td>
+        </tr>
+        <tr>
+            <td>
+                A || B
+            </td>
+            <td>
+                filter[]=key:A&amp;filter[]=key<strong>_or</strong>:B
+            </td>
+        </tr>
+        <tr>
+            <td>
+                A || B &amp;&amp; C
+            </td>
+            <td>
+                filter[]=key:A&amp;filter[]=key_or:B&amp; filter[]=key_and:B
+            </td>
+        </tr>
+        <tr>
+            <td>
+                A &amp;&amp; B || C &amp;&amp; D
+            </td>
+            <td>
+                filter[]=key:A&amp;filter[]=key_and:B&amp; filter[]=key_or:C&amp;filter[]=key_and:D
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p>The order of resolution should follow a precendence order. An operation like <strong><em>A &amp;&amp; B || C &amp;&amp; D</em></strong> should be evaluated as <strong><em>(A &amp;&amp; B) || (C &amp;&amp; D)</em></strong></p>
+
+<h6 id="not-recommended-9">NOT Recommended</h6>
+
+<ul>
+  <li>A complex long filter and exclude combination. In those cases consider using search API.</li>
+</ul>
+
+<h4 id="item-14--advanced-search-is-different">Item 14:    Advanced /search is different</h4>
+
+<p>A lot many times filter and sort are used to do complex searching operations via get API. This can get complex quickly.</p>
+
+<h6 id="recommended-12">Recommended</h6>
+<ul>
+  <li>Use POST for all searches</li>
+  <li>Cache the results in the backend based on query hash</li>
+  <li>Allow for accessing query result using GET with a query hash</li>
+</ul>
+
+<h6 id="not-recommended-10">NOT Recommended</h6>
+<ul>
+  <li>GET for complex /search?itemname=salad&amp;area=california&amp;more</li>
+</ul>
+
+<h4 id="item-15--global-search">Item 15:    Global search</h4>
+
+<h6 id="recommended-13">Recommended</h6>
+<ul>
+  <li>?q=value&amp;scope=value</li>
+  <li>GET https://domain.com/e/?q=value&amp;scope=menu</li>
+</ul>
+
+<h6 id="not-recommended-11">NOT Recommended</h6>
+<ul>
+  <li>POST https://domain.com/?q=value&amp;scope=menu use <strong><em>item 10 instead</em></strong></li>
+</ul>
+
+<h4 id="item-16--reserved-urls">Item 16:    Reserved URLs</h4>
+<ul>
+  <li>/health/*</li>
+  <li>/debug/*</li>
+  <li>/metrics/*</li>
+  <li>/status/*</li>
+</ul>
+
+<h4 id="item-17--content-type-in-url">Item 17:    Content type in URL</h4>
+<p>Different clients would require different response types, e.g, HTML, JSON APIs, binary reponse, XML. The client should be able to specify the response data it would need.</p>
+
+<h6 id="recommended-14">Recommended</h6>
+<ul>
+  <li>use the content-type header to specify if you want xml or json</li>
+</ul>
+
+<h6 id="not-recommended-12">NOT Recommended</h6>
+<ul>
+  <li>adding it to the url like /device-management/managed-devices<strong>.xml</strong></li>
+  <li>adding it to the url like /device-management/managed-devices<strong>.json</strong></li>
+  <li>adding it to the url like /device-management/managed-devices<strong>.html</strong></li>
+</ul>
+
+<h4 id="item-18--versioning">Item 18:    Versioning</h4>
+<p>An API has versioning across two dimensions</p>
+
+<h6 id="logic">Logic</h6>
+<p>A change where /menu-editor/update-menu restricts updating the menu of archived items, but it used to allow it for previous version of the mobile apps (that are still used by customers).</p>
+<h6 id="schema">Schema</h6>
+<p>A change where /menu-editor/update-menu now optionally takes another value “rating” for each menu item.</p>
+
+<p>Logic and schema can be a “breaking change” or a “non breaking change” and should be treated differently when versioning.</p>
+
+<h6 id="recommended-15">Recommended</h6>
+<ul>
+  <li>Attempt to remain backward compatible in logic and schema.</li>
+  <li>Non-breaking changes (rarely used)
+    <ul>
+      <li>Send version in a separate header if needed. It might be optionally respected.</li>
+      <li>X-COMPANY-API-MINOR-VERSION:1.5</li>
+    </ul>
+  </li>
+  <li>Breaking change for internal APIs
+    <ul>
+      <li>Add a new version to the path of the API being changed
+        <ul>
+          <li>/v3/menu-editor/update-menu</li>
+          <li>/v4/menu-editor/menu-items</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Breaking change for external APIs
+    <ul>
+      <li>Accumulate changes into a single upgrade for all APIs
+        <ul>
+          <li>
+            <s>/v3/menu-editor/update-menu</s>
+          </li>
+          <li>/v4/menu-editor/menu-items</li>
+          <li>/v4/menu-editor/update-menu</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h6 id="not-recommended-13">NOT Recommended</h6>
+
+<ul>
+  <li>Accept: application/vnd.megacorp.bookings+json; <strong>version=1.0</strong></li>
+  <li>/menu-editor/update-menu?<strong>version=v3</strong></li>
+  <li>/<strong>v3</strong>/menu-editor/<strong>v1</strong>/update-menu</li>
+</ul>
+
+<h4 id="item-19--provide-pretty-option">Item 19:    Provide “pretty” option</h4>
+
+<p>With JSON APIs a developer would be accessing your API during development.</p>
+
+<h6 id="recommended-16">Recommended</h6>
+
+<ul>
+  <li>support ?pretty=true to return non minified JSON response.</li>
+</ul>
+
+<h4 id="item-20--naming-your-resources">Item 20:    Naming your resources</h4>
+
+<p>Naming resources is one of the most complex topics of URL design.</p>
+
+<h6 id="recommended-17">Recommended</h6>
+
+<ul>
+  <li>Map APIs to business operations and not tables
+    <ul>
+      <li>You should convert /area/1/restaurant/5/menu/6/menuitem/4 into a logical operation of “menu-editor”.</li>
+      <li>Use /menu-editor/update-menu instead</li>
+    </ul>
+  </li>
+  <li>Use singular names in path
+    <ul>
+      <li>Plural can sometimes become confusing. Here is an example /goose vs /geese.</li>
+    </ul>
+  </li>
+  <li>Don’t fret using HTTP verbs in url
+    <ul>
+      <li>it is ok to use /get-restaurant</li>
+      <li>POST /delete-restaurant is fine too</li>
+    </ul>
+  </li>
+</ul>
+
+<h6 id="not-recommended-14">NOT Recommended</h6>
+
+<ul>
+  <li>Map APIs 100% to your normalized table names.
+    <ul>
+      <li>keeping it normalized will make client business heavy (resulting in tight coupling). A client will then have to understand the exact relationship between restaurant and a menuitem to orchestrate them.</li>
+      <li>Chattiness between client &amp; server increases with normalization</li>
+      <li>Transaction across APIs will not always succeed and will leave the backend in inconsistent state.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="practical-example-applying-all-items">Practical Example applying all items</h4>
+
+<p>Imagine you have a food ordering website and you are building rest APIs for it.</p>
+
+<p><strong>Tables</strong>: User, Account, PaymentAccount, Payment, SubscriptionType, Menu, MenuItem, MenuMenuItem, SubscriptionTypeMenuMenuItem, Cart, CartItem, CartItemMenuMenuItem, Restaurant, RestaurantAccount, RestaurantMenu</p>
+
+<h6 id="step-1-write-down-the-top-5-interactions-a-customer-does-with-this-system">Step 1: Write down the top 5 interactions a customer does with this system</h6>
+<ul>
+  <li>Signup and Add payment</li>
+  <li>Create a new cart and add menu items</li>
+  <li>Update items on a card</li>
+  <li>Checkout</li>
+</ul>
+
+<h6 id="step-2-refine-and-consolidate">Step 2: Refine and consolidate</h6>
+<ul>
+  <li>Account setup (signup, add payments)</li>
+  <li>Shopping (create a cart and add menu items)</li>
+  <li>Configure menu (creates menu, edit menu items)</li>
+</ul>
+
+<h6 id="step-3-finalize-root-url-paths">Step 3: Finalize root URL paths</h6>
+<ul>
+  <li>/account-setup/</li>
+  <li>/shopping/</li>
+  <li>/menu/</li>
+  <li>/menu-editor/</li>
+  <li>/restaurant/</li>
+</ul>
+
+<h6 id="step-4-provide-shortcuts-for-many-to-many-assignments">Step 4: Provide shortcuts for many to many assignments</h6>
+<ul>
+  <li>/menu/<strong>menu-items/:menuItem/restaurants</strong></li>
+  <li>/restaurant/:restaurantId/menu-item</li>
+</ul>
+
+<h6 id="step-5-convert-similar-urls-to-filter-sort-and-exclude">Step 5: Convert similar urls to filter, sort and exclude</h6>
+<ul>
+  <li>/get-highest-rating-restaurants becomes
+    <ul>
+      <li>/restaurant/?sort=rating+DESC&amp;limit=10</li>
+    </ul>
+  </li>
+  <li>from: /get-lowest-rating-restaurants
+    <ul>
+      <li>to: /restaurant/?sort=rating+ASC&amp;limit=10</li>
+    </ul>
+  </li>
+  <li>/get-all-restaurants
+    <ul>
+      <li>/restaurant</li>
+    </ul>
+  </li>
+  <li>/get-chain-resturants
+    <ul>
+      <li>/restaurant?filter=type:chain</li>
+    </ul>
+  </li>
+  <li>/get-restaurant-owned-by-mcdonalds
+    <ul>
+      <li>/restaurant?alias=mcdonalds</li>
+    </ul>
+  </li>
+  <li>Step 6: Alias common queries
+    <ul>
+      <li>/get-restaurants-closed-last-month
+        <ul>
+          <li>/restaurant?alias=closed-last-montly</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="conclusion">Conclusion</h4>
+
+<p>Getting everything right is always hard. Do understand that REST is going to be as close as possible, but be practical. Above everything else remain consistent and your API will be pleasant to use in the long run.</p>
+
+
+			</div>
+                
+
+			<!-- Post Categories -->
+			<div class="after-post-tags">
+				<ul class="tags">
+                    
+                    
+                    <li>
+                     <a href="/category/software/">Software</a>
+                    </li>
+                    
+				</ul>
+			</div>
+			<!-- End Categories -->
+
+            <!-- Mailchimp Subscribe Form -->
+            
+            <div class="border p-5 bg-lightblue">
+                <div class="row justify-content-between">
+                    <div class="col-md-6 mb-2 mb-md-0">
+                        <h5 class="font-weight-bold">Join Newsletter</h5>
+                         Get the latest news right in your inbox. We never spam!
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <form action="https://hackinghabits.us7.list-manage.com/subscribe/post?u=1905d7890664dc19a7db56f71&amp;id=03445b764c" method="post" name="mc-embedded-subscribe-form" class="wj-contact-form validate w-100" target="_blank" novalidate>
+                            <div class="mc-field-group">
+                            
+                                <input type="email" placeholder="Enter e-mail address" name="EMAIL" class="required email form-control w-100" id="mce-EMAIL" autocomplete="on" required>
+                            
+                            
+                                <button type="submit" value="Subscribe" name="subscribe" class="heart btn btn-success btn-block w-100 mt-2">Subscribe</button>
+                            
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- Author Box -->
+                            
+            <div class="row post-top-meta">
+                <div class="col-md-2">
+                    <img class="author-thumb" src="https://www.gravatar.com/avatar/2bf96ac5a4cd362b77c3503fedb03e92?s=250&d=mm&r=x" alt="Madan">
+                </div>
+                <div class="col-md-10">
+                    <a target="_blank" class="link-dark" href="https://hackinghabits.com">Madan</a><a target="_blank" href="https://twitter.com/hackinghabits" class="btn follow">Follow</a>
+                    <span class="author-description">Engineering manager @ Uber. I love building scalable API Platforms serving thousands of APIs to millions of customers each second. This blog is my way of keeping up with technology.</span>                        
+                </div>
+            </div>              
+            
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html"> &laquo; REST API guidelines are outdated and insufficient</a>
+            
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+		</div>
+		<!-- End Post -->
+
+	</div>
+</div>
+<!-- End Article
+================================================== -->
+
+  
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">              
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hackinghabits-com-1'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+                
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+</div>
+
+<!-- Bottom Alert Bar
+================================================== -->
+<div class="alertbar">
+	<div class="container text-center">
+		<span><img src="/assets/images/logo.png" alt=""> &nbsp;  &nbsp;   &nbsp;   &nbsp;  &nbsp;   &nbsp;   &nbsp;   &nbsp;   &nbsp; Subscribe to my <b>monthly</b> tech newsletter</span>
+        <form action="https://hackinghabits.us7.list-manage.com/subscribe/post?u=1905d7890664dc19a7db56f71&amp;id=03445b764c" method="post" name="mc-embedded-subscribe-form" class="wj-contact-form validate" target="_blank" novalidate>
+            <div class="mc-field-group">
+            <input type="email" placeholder="Email" name="EMAIL" class="required email" id="mce-EMAIL" autocomplete="on" required>
+            <input type="submit" value="Subscribe" name="subscribe" class="heart">
+            </div>
+        </form>
+	</div>
+</div>    
+    
+</div><!-- /.container>
+    
+<!-- Categories Jumbotron
+================================================== -->
+
+
+ 
+
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center">
+                 Copyright © 2020 Hacking Habits 
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+   
+</div> 
+
+<!-- /.site-content> -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+    
+<script src="/assets/js/jquery.min.js"></script>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+    
+<script src="/assets/js/mediumish.js"></script>
+    
+<script id="dsq-count-scr" src="//hackinghabits-com-1.disqus.com/count.js"></script>
+</body>
+</html>

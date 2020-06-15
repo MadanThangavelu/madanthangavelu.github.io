@@ -10,6 +10,12 @@ image: /assets/images/posts/2020-05-20-REST-is-not-a-standard/restful-not-a-stan
 
 A year after your project execution you realize that the APIs are messy and inconsistent. Things looked good when you started the project, so where did you go wrong? Was it you or was it REST?
 
+**Story line**
+
+* TOC
+{:.slim-toc}
+{:toc}
+
 ## Why did we invent REST APIs?
 
 The internet was largely composed of static websites around 2000. Visiting a website like foobar.com/some/path would return HTML content back which the browsers knew how to render. 
@@ -77,7 +83,9 @@ Same is true for REST APIs. Let us get into what REST is and how it has failed u
 
 ## Introduction of REST
 
-While APIs have existed even before the formalization of HTTP in 1997. XMLHttpRequest (XHR) in browsers in the mid 2000’s was a pivotal moment when APIs became mainstream. This allowed a browsers to speak multiple requests to the server and fetch the information they need without reloading the entire view. This essentially gave birth to the the now commonly known term web APIs. 
+REST was introduced In 2000 by Roy fielding as part of a PHD thesis.
+
+APIs existed even before the formalization of HTTP in 1997. XMLHttpRequest (XHR) in browsers in the mid 2000’s was a pivotal moment when APIs became mainstream. This allowed a browsers to speak multiple requests to the server and fetch the information they need without reloading the entire view. This essentially gave birth to the the now commonly known term web APIs. 
 
 APIs became the contract between the backend and the frontend systems to “transfer state”.
 
@@ -85,7 +93,6 @@ HTTP was already providing the core component of data transfer protocol between 
 
 Representational State Transfer (REST) was an architectural proposal of how to use the 3 HTTP components (uri, header, body) to create some uniformity when building business applications that represent server state on the client.
 
-REST was introduced In 2000 by Roy fielding as part of a PHD thesis.
 
 ##### Theoretical Principles
 

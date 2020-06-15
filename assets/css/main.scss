@@ -123,3 +123,24 @@
     margin-top: 50px;
     border-bottom: 1px solid #00ab6b;
 }
+
+ul.slim-toc > li > ul {
+    display: none;
+}
+
+ul.slim-toc > li  {
+    color: #3eb0ef;
+    text-decoration: none;
+}
+
+.blockquote-success {
+    border-left: 4px solid #00ab6b;
+}
+
+.blockquote-warning {
+    border-left: 4px solid #ffc107;
+}
+
+.blockquote-danger {
+    border-left: 4px solid #dc3545;
+}

@@ -5,9 +5,901 @@
     <description>A technical blog by Madan Thangavelu</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 14 Jun 2020 13:00:54 -0700</pubDate>
-    <lastBuildDate>Sun, 14 Jun 2020 13:00:54 -0700</lastBuildDate>
+    <pubDate>Sun, 14 Jun 2020 14:57:22 -0700</pubDate>
+    <lastBuildDate>Sun, 14 Jun 2020 14:57:22 -0700</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>REST URL design - An opinionated list of best practices</title>
+        <description>&lt;p&gt;REST APIs come in all flavors. A quick review of all APIs provided from twitter, facebook, google, twillio and other companies make it clear that there is no single standard. You can checkout my other post on why REST APIs are outdated.&lt;/p&gt;
+
+&lt;p&gt;This article is a list of practical recommendations when developing new REST APIs design. Consider them as an oppunionated design guidance. There is no right and wrong, but pick one and stick with it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Story line&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;slim-toc&quot; id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-1--use-only-get--post&quot; id=&quot;markdown-toc-item-1--use-only-get--post&quot;&gt;Item 1:    Use only GET &amp;amp; POST&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended&quot; id=&quot;markdown-toc-recommended&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended&quot; id=&quot;markdown-toc-not-recommended&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-2---use-patch-delete--put-only-if&quot; id=&quot;markdown-toc-item-2---use-patch-delete--put-only-if&quot;&gt;Item 2:     Use PATCH, DELETE &amp;amp; PUT only if&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-3--casing-in-the-url&quot; id=&quot;markdown-toc-item-3--casing-in-the-url&quot;&gt;Item 3:    Casing in the url&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-1&quot; id=&quot;markdown-toc-recommended-1&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-1&quot; id=&quot;markdown-toc-not-recommended-1&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#some-industry-usages&quot; id=&quot;markdown-toc-some-industry-usages&quot;&gt;Some industry usages&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-4--do-not-have-deeplynestedurlpaths&quot; id=&quot;markdown-toc-item-4--do-not-have-deeplynestedurlpaths&quot;&gt;Item 4:    Do not have /deeply/nested/url/paths&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-2&quot; id=&quot;markdown-toc-recommended-2&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-2&quot; id=&quot;markdown-toc-not-recommended-2&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-5--boolean-in-query&quot; id=&quot;markdown-toc-item-5--boolean-in-query&quot;&gt;Item 5:    Boolean in query&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-3&quot; id=&quot;markdown-toc-recommended-3&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-3&quot; id=&quot;markdown-toc-not-recommended-3&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-6--arrays-in-query&quot; id=&quot;markdown-toc-item-6--arrays-in-query&quot;&gt;Item 6:    Arrays in query&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-4&quot; id=&quot;markdown-toc-recommended-4&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-4&quot; id=&quot;markdown-toc-not-recommended-4&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-7--hash-in-query&quot; id=&quot;markdown-toc-item-7--hash-in-query&quot;&gt;Item 7:    Hash in query&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-5&quot; id=&quot;markdown-toc-recommended-5&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-5&quot; id=&quot;markdown-toc-not-recommended-5&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-8--batch-api-vs-single-api&quot; id=&quot;markdown-toc-item-8--batch-api-vs-single-api&quot;&gt;Item 8:    Batch API vs Single API&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-6&quot; id=&quot;markdown-toc-recommended-6&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-6&quot; id=&quot;markdown-toc-not-recommended-6&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-9---in-query-params&quot; id=&quot;markdown-toc-item-9---in-query-params&quot;&gt;Item 9:    + in query params&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-10--sort&quot; id=&quot;markdown-toc-item-10--sort&quot;&gt;Item 10:    Sort&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-7&quot; id=&quot;markdown-toc-recommended-7&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-7&quot; id=&quot;markdown-toc-not-recommended-7&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-11-pagination&quot; id=&quot;markdown-toc-item-11-pagination&quot;&gt;Item 11:  Pagination&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-8&quot; id=&quot;markdown-toc-recommended-8&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-8&quot; id=&quot;markdown-toc-not-recommended-8&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-12--filter--exclude&quot; id=&quot;markdown-toc-item-12--filter--exclude&quot;&gt;Item 12:    filter &amp;amp; exclude&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-9&quot; id=&quot;markdown-toc-recommended-9&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-10&quot; id=&quot;markdown-toc-recommended-10&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-13--filter--exclude-with-logic&quot; id=&quot;markdown-toc-item-13--filter--exclude-with-logic&quot;&gt;Item 13:    filter &amp;amp; exclude with logic&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-11&quot; id=&quot;markdown-toc-recommended-11&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-9&quot; id=&quot;markdown-toc-not-recommended-9&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-14--advanced-search-is-different&quot; id=&quot;markdown-toc-item-14--advanced-search-is-different&quot;&gt;Item 14:    Advanced /search is different&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-12&quot; id=&quot;markdown-toc-recommended-12&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-10&quot; id=&quot;markdown-toc-not-recommended-10&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-15--global-search&quot; id=&quot;markdown-toc-item-15--global-search&quot;&gt;Item 15:    Global search&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-13&quot; id=&quot;markdown-toc-recommended-13&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-11&quot; id=&quot;markdown-toc-not-recommended-11&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-16--reserved-urls&quot; id=&quot;markdown-toc-item-16--reserved-urls&quot;&gt;Item 16:    Reserved URLs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-17--content-type-in-url&quot; id=&quot;markdown-toc-item-17--content-type-in-url&quot;&gt;Item 17:    Content type in URL&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-14&quot; id=&quot;markdown-toc-recommended-14&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-12&quot; id=&quot;markdown-toc-not-recommended-12&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-18--versioning&quot; id=&quot;markdown-toc-item-18--versioning&quot;&gt;Item 18:    Versioning&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#logic&quot; id=&quot;markdown-toc-logic&quot;&gt;Logic&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#schema&quot; id=&quot;markdown-toc-schema&quot;&gt;Schema&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-15&quot; id=&quot;markdown-toc-recommended-15&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-13&quot; id=&quot;markdown-toc-not-recommended-13&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-19--provide-pretty-option&quot; id=&quot;markdown-toc-item-19--provide-pretty-option&quot;&gt;Item 19:    Provide “pretty” option&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-16&quot; id=&quot;markdown-toc-recommended-16&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#item-20--naming-your-resources&quot; id=&quot;markdown-toc-item-20--naming-your-resources&quot;&gt;Item 20:    Naming your resources&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#recommended-17&quot; id=&quot;markdown-toc-recommended-17&quot;&gt;Recommended&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-recommended-14&quot; id=&quot;markdown-toc-not-recommended-14&quot;&gt;NOT Recommended&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#practical-example-applying-all-items&quot; id=&quot;markdown-toc-practical-example-applying-all-items&quot;&gt;Practical Example applying all items&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#step-1-write-down-the-top-5-interactions-a-customer-does-with-this-system&quot; id=&quot;markdown-toc-step-1-write-down-the-top-5-interactions-a-customer-does-with-this-system&quot;&gt;Step 1: Write down the top 5 interactions a customer does with this system&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#step-2-refine-and-consolidate&quot; id=&quot;markdown-toc-step-2-refine-and-consolidate&quot;&gt;Step 2: Refine and consolidate&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#step-3-finalize-root-url-paths&quot; id=&quot;markdown-toc-step-3-finalize-root-url-paths&quot;&gt;Step 3: Finalize root URL paths&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#step-4-provide-shortcuts-for-many-to-many-assignments&quot; id=&quot;markdown-toc-step-4-provide-shortcuts-for-many-to-many-assignments&quot;&gt;Step 4: Provide shortcuts for many to many assignments&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#step-5-convert-similar-urls-to-filter-sort-and-exclude&quot; id=&quot;markdown-toc-step-5-convert-similar-urls-to-filter-sort-and-exclude&quot;&gt;Step 5: Convert similar urls to filter, sort and exclude&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#conclusion&quot; id=&quot;markdown-toc-conclusion&quot;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-1--use-only-get--post&quot;&gt;Item 1:    Use only GET &amp;amp; POST&lt;/h4&gt;
+
+&lt;p&gt;HTTP and REST spec provide a variety of request verbs like GET, POST, PATCH, PUT and DELETE.&lt;/p&gt;
+
+&lt;blockquote class=&quot;blockquote-success&quot;&gt;
+
+  &lt;h6 id=&quot;recommended&quot;&gt;Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you control your callers, stick to only GET and POST HTTP methods. This is true when all the callers are internal company products. Let us look at each of the HTTP verbs and understand why I suggest you to stay away from them.&lt;/p&gt;
+
+&lt;blockquote class=&quot;blockquote-danger&quot;&gt;
+
+  &lt;h6 id=&quot;not-recommended&quot;&gt;NOT Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PUT
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;This verb puts too much knowledge of internals to the client. The client needs to reconstruct the exact payload with all the relationships which will force the client to understand all the foreign key relationships.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Imagine you have a restaurant table backing a /restaurant object. A PUT during a name update will force you to understand the menu items foreignkeys.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;PATCH
+    &lt;ul&gt;
+      &lt;li&gt;Absolutely no reason to know whether it was a partial update or a full update. Infact sometimes partial updates might put your backend into a logically inconsistent state.&lt;/li&gt;
+      &lt;li&gt;Imagine the restaurant patch updates the name, but new restaurant creation via POST has validationst that are not replicated into the PATCH API.&lt;/li&gt;
+      &lt;li&gt;Not all frameworks implement this verb correctly. Here is an &lt;a href=&quot;https://laravel.io/forum/02-13-2014-i-can-not-get-inputs-from-a-putpatch-request&quot;&gt;old issue&lt;/a&gt; from the laravel framework community. If your company is developing software on new languages or frameworks, it is better to stick with commonly used verbs.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;DELETE
+    &lt;ul&gt;
+      &lt;li&gt;This verb does &lt;a href=&quot;https://stackoverflow.com/questions/15619075/webapi-delete-not-working-405-method-not-allowed&quot;&gt;not support passing data via body&lt;/a&gt;. This forces all parameters to be passed through query parameters and query parameters can sometimes be insufficient. This will result in some of your APIs using DELETE while others default back to POST resulting in inconsistencies.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-2---use-patch-delete--put-only-if&quot;&gt;Item 2:     Use PATCH, DELETE &amp;amp; PUT only if&lt;/h4&gt;
+
+&lt;p&gt;If your company actively sells APIs for integrations to external vendors into your product, try to support all HTTP verbs. You may still choose to convert incoming requests to a POST before your serving layer.&lt;/p&gt;
+
+&lt;p&gt;Not doing so will result in &lt;a href=&quot;https://success.salesforce.com/ideaView?id=0873A000000PST0QAO&quot;&gt;Cross Vendor integrations issues&lt;/a&gt; as we see in the support ticket.&lt;/p&gt;
+
+&lt;h4 id=&quot;item-3--casing-in-the-url&quot;&gt;Item 3:    Casing in the url&lt;/h4&gt;
+
+&lt;p&gt;There are hand full of casing used by various companies and there appears to be no true consensus. I do recommend picking one and sticking with it.&lt;/p&gt;
+
+&lt;blockquote class=&quot;blockquote-success&quot;&gt;
+
+  &lt;h6 id=&quot;recommended-1&quot;&gt;Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841&quot;&gt;/use-kebab-case&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;keep the urls characters in lowercase [0-9][a-z]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote class=&quot;blockquote-danger&quot;&gt;
+
+  &lt;h6 id=&quot;not-recommended-1&quot;&gt;NOT Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;/underscores_between_urls&lt;/li&gt;
+  &lt;li&gt;/camelCase&lt;/li&gt;
+  &lt;li&gt;Special characters outside of [0-9][a-z]&lt;/li&gt;
+  &lt;li&gt;Do not use upper case in the URL (using them in query is fine)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;some-industry-usages&quot;&gt;Some industry usages&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;Twitter - &lt;a href=&quot;https://developer.twitter.com/en/docs/api-reference-index&quot;&gt;snake case&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Square - &lt;a href=&quot;https://developer.squareup.com/reference/square/labor-api&quot;&gt;kebab case&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Google Maps - &lt;a href=&quot;https://developers.google.com/places/web-service/query&quot;&gt;no case&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Stack overflow &lt;a href=&quot;https://api.stackexchange.com/docs&quot;&gt;kebab case&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;AWS API &lt;a href=&quot;https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AcceptVpcEndpointConnections.html&quot;&gt;cameCase&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-4--do-not-have-deeplynestedurlpaths&quot;&gt;Item 4:    Do not have /deeply/nested/url/paths&lt;/h4&gt;
+
+&lt;p&gt;Using pure REST semantics might force some APIs to be really nested.&lt;/p&gt;
+
+&lt;blockquote class=&quot;blockquote-success&quot;&gt;
+
+  &lt;h6 id=&quot;recommended-2&quot;&gt;Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Max depth 2
+    &lt;ul&gt;
+      &lt;li&gt;GET or POST /area/1/restaurant/5&lt;/li&gt;
+      &lt;li&gt;GET or POST /menu/6/menuitem/4&lt;/li&gt;
+      &lt;li&gt;POST /menu-editor/update-menu&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Browser urls and proxies allow a max length. Set a smaller value and Respond with a 414 statuscode.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote class=&quot;blockquote-danger&quot;&gt;
+
+  &lt;h6 id=&quot;not-recommended-2&quot;&gt;NOT Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;/area/1/restaurant/5/menu/6/menuitem/4&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-5--boolean-in-query&quot;&gt;Item 5:    Boolean in query&lt;/h4&gt;
+
+&lt;p&gt;There are many ways to represent boolean as string, numbers in query, params and body. It is critical to pick one and stick with it.&lt;/p&gt;
+
+&lt;blockquote class=&quot;blockquote-success&quot;&gt;
+
+  &lt;h6 id=&quot;recommended-3&quot;&gt;Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;use “true”, “false” in query - /?active=true&lt;/li&gt;
+  &lt;li&gt;use “true”, “false” in body - {“active”: true}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;not-recommended-3&quot;&gt;NOT Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;“0” &amp;amp; “1” (string) - /?active=1&lt;/li&gt;
+  &lt;li&gt;0 &amp;amp; 1 (int) - {“active”: 1}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-6--arrays-in-query&quot;&gt;Item 6:    Arrays in query&lt;/h4&gt;
+&lt;p&gt;There are times when you would want to pass an array to the server using a GET request. Pick one to stick with it.&lt;/p&gt;
+
+&lt;blockquote class=&quot;blockquote-success&quot;&gt;
+
+  &lt;h6 id=&quot;recommended-4&quot;&gt;Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;/?key[]=1&amp;amp;key[]=2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;not-recommended-4&quot;&gt;NOT Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;/?keys[]=1&amp;amp;keys[]=2 (note plural)&lt;/li&gt;
+  &lt;li&gt;/?key=1&amp;amp;key=2&lt;/li&gt;
+  &lt;li&gt;/?key=1,2&lt;/li&gt;
+  &lt;li&gt;/?key=[1,2]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-7--hash-in-query&quot;&gt;Item 7:    Hash in query&lt;/h4&gt;
+&lt;p&gt;Although relatively rare, there are times when you would want to pass a dictionary to the server using a GET request. Pick one to stick with it.&lt;/p&gt;
+
+&lt;blockquote class=&quot;blockquote-success&quot;&gt;
+
+  &lt;h6 id=&quot;recommended-5&quot;&gt;Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;/person?details.age=5&amp;amp;details.gender=male&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;not-recommended-5&quot;&gt;NOT Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;/person?details[age]=5&amp;amp;details[gender]=male&lt;/li&gt;
+  &lt;li&gt;url encoded string - /person?hash=details%5Bage%5D%3D5&lt;/li&gt;
+  &lt;li&gt;multi level nesting - details.age.birthyear&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-8--batch-api-vs-single-api&quot;&gt;Item 8:    Batch API vs Single API&lt;/h4&gt;
+&lt;p&gt;Very often your APIs start with returning a single item and operating on a single item. As performance bottlenecks arise, there will be a need for a bulk api. If you stick with this plan, you will not have to double implement a shim everytime you need a bulk operation on an existing API.&lt;/p&gt;
+
+&lt;blockquote class=&quot;blockquote-success&quot;&gt;
+
+  &lt;h6 id=&quot;recommended-6&quot;&gt;Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Collection - /menu-items&lt;/li&gt;
+  &lt;li&gt;Getting a single Resource - /menu-items/a&lt;/li&gt;
+  &lt;li&gt;/menu/remove-items?id[]=20&amp;amp;id[]=30&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;not-recommended-6&quot;&gt;NOT Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;Collection - /bulk-menu-items or /all-menu-items&lt;/li&gt;
+  &lt;li&gt;Getting a single resource with - /menu-item&lt;/li&gt;
+  &lt;li&gt;/menu/remove-item?id[]=20&amp;amp;id[]=30 (note singlar name remove-item)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-9---in-query-params&quot;&gt;Item 9:    + in query params&lt;/h4&gt;
+&lt;p&gt;”+” is a special character that can be used in query. When used, your query will replace the “+” for a “space” when the query is read.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;/books?q=a+5 server reads as “a 5”&lt;/li&gt;
+  &lt;li&gt;/books?q=a+++++5 server reads as “a     5”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This will be handy in cases like sort, as we will see in the next item.&lt;/p&gt;
+
+&lt;h4 id=&quot;item-10--sort&quot;&gt;Item 10:    Sort&lt;/h4&gt;
+&lt;p&gt;Across all APIs use a standard query, body field name for sorting operations. Use the DESC and ASC keywords.&lt;/p&gt;
+
+&lt;blockquote class=&quot;blockquote-success&quot;&gt;
+
+  &lt;h6 id=&quot;recommended-7&quot;&gt;Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;/books?&lt;strong&gt;sort[]&lt;/strong&gt;=title&lt;strong&gt;+DESC&lt;/strong&gt;&amp;amp;sort[]=author+ASC&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;not-recommended-7&quot;&gt;NOT Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;/menu?&lt;strong&gt;sort&lt;/strong&gt;=title&amp;amp;&lt;strong&gt;desc&lt;/strong&gt;=title or ?&lt;strong&gt;sort&lt;/strong&gt;=title&amp;amp;&lt;strong&gt;asc&lt;/strong&gt;=author&lt;/li&gt;
+  &lt;li&gt;/menu?&lt;strong&gt;sortby&lt;/strong&gt;=itemname&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-11-pagination&quot;&gt;Item 11:  Pagination&lt;/h4&gt;
+&lt;p&gt;Almost all APIs returning a list needs pagination once the length of the return data is more than a few hundreds.&lt;/p&gt;
+
+&lt;blockquote class=&quot;blockquote-success&quot;&gt;
+
+  &lt;h6 id=&quot;recommended-8&quot;&gt;Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;/menuitems?offset=5&amp;amp;limit=10&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;not-recommended-8&quot;&gt;NOT Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;/menuitems?page[number]=5&amp;amp;page[size]=10&lt;/li&gt;
+  &lt;li&gt;Doing the pagination through headers
+    &lt;ul&gt;
+      &lt;li&gt;Content-Range&lt;/li&gt;
+      &lt;li&gt;Accept-Range&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-12--filter--exclude&quot;&gt;Item 12:    filter &amp;amp; exclude&lt;/h4&gt;
+&lt;p&gt;A number of times you would want to filter (select) or exclude (unselect) the response data based on certain parameters. In those cases, reserve special query parameters.&lt;/p&gt;
+
+&lt;blockquote class=&quot;blockquote-success&quot;&gt;
+
+  &lt;h6 id=&quot;recommended-9&quot;&gt;Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;/menu-items?filter=key:value&lt;/li&gt;
+  &lt;li&gt;/menu-items?filter=ingredient:tomatoes&lt;/li&gt;
+  &lt;li&gt;/menu-items?filter[]=ingredient:tomatoes&amp;amp;filter[]=size:xl&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are cases where you will have to use lte, gte to represent ‘less than equal’ and ‘greater than equal’. In those cases the following is recommended.&lt;/p&gt;
+
+&lt;h6 id=&quot;recommended-10&quot;&gt;Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;/menu-items?filter=key&lt;strong&gt;_lte&lt;/strong&gt;:value&lt;/li&gt;
+  &lt;li&gt;/menu-items?filter=price&lt;strong&gt;_lte&lt;/strong&gt;:117&lt;/li&gt;
+  &lt;li&gt;/menu-items?filter=price&lt;strong&gt;_gte&lt;/strong&gt;:117&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-13--filter--exclude-with-logic&quot;&gt;Item 13:    filter &amp;amp; exclude with logic&lt;/h4&gt;
+
+&lt;p&gt;There are also caess where we will need boolean operations for our filters. In those cases we will have to introduce boolean operations into the filter query.&lt;/p&gt;
+
+&lt;blockquote class=&quot;blockquote-success&quot;&gt;
+
+  &lt;h6 id=&quot;recommended-11&quot;&gt;Recommended&lt;/h6&gt;
+&lt;/blockquote&gt;
+
+&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col width=&quot;30%&quot; /&gt;
+        &lt;col width=&quot;70%&quot; /&gt; &lt;/colgroup&gt;
+    &lt;thead&gt;
+        &lt;tr class=&quot;header&quot;&gt;
+            &lt;th&gt;Logic&lt;/th&gt;
+            &lt;th&gt;Query&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                A &amp;amp;&amp;amp; B
+            &lt;/td&gt;
+            &lt;td&gt;
+                filter[]=key:A&amp;amp;filter[]=key&lt;strong&gt;_and&lt;/strong&gt;:B
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                A || B
+            &lt;/td&gt;
+            &lt;td&gt;
+                filter[]=key:A&amp;amp;filter[]=key&lt;strong&gt;_or&lt;/strong&gt;:B
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                A || B &amp;amp;&amp;amp; C
+            &lt;/td&gt;
+            &lt;td&gt;
+                filter[]=key:A&amp;amp;filter[]=key_or:B&amp;amp; filter[]=key_and:B
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                A &amp;amp;&amp;amp; B || C &amp;amp;&amp;amp; D
+            &lt;/td&gt;
+            &lt;td&gt;
+                filter[]=key:A&amp;amp;filter[]=key_and:B&amp;amp; filter[]=key_or:C&amp;amp;filter[]=key_and:D
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The order of resolution should follow a precendence order. An operation like &lt;strong&gt;&lt;em&gt;A &amp;amp;&amp;amp; B || C &amp;amp;&amp;amp; D&lt;/em&gt;&lt;/strong&gt; should be evaluated as &lt;strong&gt;&lt;em&gt;(A &amp;amp;&amp;amp; B) || (C &amp;amp;&amp;amp; D)&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h6 id=&quot;not-recommended-9&quot;&gt;NOT Recommended&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A complex long filter and exclude combination. In those cases consider using search API.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-14--advanced-search-is-different&quot;&gt;Item 14:    Advanced /search is different&lt;/h4&gt;
+
+&lt;p&gt;A lot many times filter and sort are used to do complex searching operations via get API. This can get complex quickly.&lt;/p&gt;
+
+&lt;h6 id=&quot;recommended-12&quot;&gt;Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;Use POST for all searches&lt;/li&gt;
+  &lt;li&gt;Cache the results in the backend based on query hash&lt;/li&gt;
+  &lt;li&gt;Allow for accessing query result using GET with a query hash&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;not-recommended-10&quot;&gt;NOT Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;GET for complex /search?itemname=salad&amp;amp;area=california&amp;amp;more&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-15--global-search&quot;&gt;Item 15:    Global search&lt;/h4&gt;
+
+&lt;h6 id=&quot;recommended-13&quot;&gt;Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;?q=value&amp;amp;scope=value&lt;/li&gt;
+  &lt;li&gt;GET https://domain.com/e/?q=value&amp;amp;scope=menu&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;not-recommended-11&quot;&gt;NOT Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;POST https://domain.com/?q=value&amp;amp;scope=menu use &lt;strong&gt;&lt;em&gt;item 10 instead&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-16--reserved-urls&quot;&gt;Item 16:    Reserved URLs&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;/health/*&lt;/li&gt;
+  &lt;li&gt;/debug/*&lt;/li&gt;
+  &lt;li&gt;/metrics/*&lt;/li&gt;
+  &lt;li&gt;/status/*&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-17--content-type-in-url&quot;&gt;Item 17:    Content type in URL&lt;/h4&gt;
+&lt;p&gt;Different clients would require different response types, e.g, HTML, JSON APIs, binary reponse, XML. The client should be able to specify the response data it would need.&lt;/p&gt;
+
+&lt;h6 id=&quot;recommended-14&quot;&gt;Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;use the content-type header to specify if you want xml or json&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;not-recommended-12&quot;&gt;NOT Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;adding it to the url like /device-management/managed-devices&lt;strong&gt;.xml&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;adding it to the url like /device-management/managed-devices&lt;strong&gt;.json&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;adding it to the url like /device-management/managed-devices&lt;strong&gt;.html&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-18--versioning&quot;&gt;Item 18:    Versioning&lt;/h4&gt;
+&lt;p&gt;An API has versioning across two dimensions&lt;/p&gt;
+
+&lt;h6 id=&quot;logic&quot;&gt;Logic&lt;/h6&gt;
+&lt;p&gt;A change where /menu-editor/update-menu restricts updating the menu of archived items, but it used to allow it for previous version of the mobile apps (that are still used by customers).&lt;/p&gt;
+&lt;h6 id=&quot;schema&quot;&gt;Schema&lt;/h6&gt;
+&lt;p&gt;A change where /menu-editor/update-menu now optionally takes another value “rating” for each menu item.&lt;/p&gt;
+
+&lt;p&gt;Logic and schema can be a “breaking change” or a “non breaking change” and should be treated differently when versioning.&lt;/p&gt;
+
+&lt;h6 id=&quot;recommended-15&quot;&gt;Recommended&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;Attempt to remain backward compatible in logic and schema.&lt;/li&gt;
+  &lt;li&gt;Non-breaking changes (rarely used)
+    &lt;ul&gt;
+      &lt;li&gt;Send version in a separate header if needed. It might be optionally respected.&lt;/li&gt;
+      &lt;li&gt;X-COMPANY-API-MINOR-VERSION:1.5&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Breaking change for internal APIs
+    &lt;ul&gt;
+      &lt;li&gt;Add a new version to the path of the API being changed
+        &lt;ul&gt;
+          &lt;li&gt;/v3/menu-editor/update-menu&lt;/li&gt;
+          &lt;li&gt;/v4/menu-editor/menu-items&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Breaking change for external APIs
+    &lt;ul&gt;
+      &lt;li&gt;Accumulate changes into a single upgrade for all APIs
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;s&gt;/v3/menu-editor/update-menu&lt;/s&gt;
+          &lt;/li&gt;
+          &lt;li&gt;/v4/menu-editor/menu-items&lt;/li&gt;
+          &lt;li&gt;/v4/menu-editor/update-menu&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;not-recommended-13&quot;&gt;NOT Recommended&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Accept: application/vnd.megacorp.bookings+json; &lt;strong&gt;version=1.0&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;/menu-editor/update-menu?&lt;strong&gt;version=v3&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;/&lt;strong&gt;v3&lt;/strong&gt;/menu-editor/&lt;strong&gt;v1&lt;/strong&gt;/update-menu&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-19--provide-pretty-option&quot;&gt;Item 19:    Provide “pretty” option&lt;/h4&gt;
+
+&lt;p&gt;With JSON APIs a developer would be accessing your API during development.&lt;/p&gt;
+
+&lt;h6 id=&quot;recommended-16&quot;&gt;Recommended&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;support ?pretty=true to return non minified JSON response.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;item-20--naming-your-resources&quot;&gt;Item 20:    Naming your resources&lt;/h4&gt;
+
+&lt;p&gt;Naming resources is one of the most complex topics of URL design.&lt;/p&gt;
+
+&lt;h6 id=&quot;recommended-17&quot;&gt;Recommended&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Map APIs to business operations and not tables
+    &lt;ul&gt;
+      &lt;li&gt;You should convert /area/1/restaurant/5/menu/6/menuitem/4 into a logical operation of “menu-editor”.&lt;/li&gt;
+      &lt;li&gt;Use /menu-editor/update-menu instead&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Use singular names in path
+    &lt;ul&gt;
+      &lt;li&gt;Plural can sometimes become confusing. Here is an example /goose vs /geese.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Don’t fret using HTTP verbs in url
+    &lt;ul&gt;
+      &lt;li&gt;it is ok to use /get-restaurant&lt;/li&gt;
+      &lt;li&gt;POST /delete-restaurant is fine too&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;not-recommended-14&quot;&gt;NOT Recommended&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Map APIs 100% to your normalized table names.
+    &lt;ul&gt;
+      &lt;li&gt;keeping it normalized will make client business heavy (resulting in tight coupling). A client will then have to understand the exact relationship between restaurant and a menuitem to orchestrate them.&lt;/li&gt;
+      &lt;li&gt;Chattiness between client &amp;amp; server increases with normalization&lt;/li&gt;
+      &lt;li&gt;Transaction across APIs will not always succeed and will leave the backend in inconsistent state.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;practical-example-applying-all-items&quot;&gt;Practical Example applying all items&lt;/h4&gt;
+
+&lt;p&gt;Imagine you have a food ordering website and you are building rest APIs for it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tables&lt;/strong&gt;: User, Account, PaymentAccount, Payment, SubscriptionType, Menu, MenuItem, MenuMenuItem, SubscriptionTypeMenuMenuItem, Cart, CartItem, CartItemMenuMenuItem, Restaurant, RestaurantAccount, RestaurantMenu&lt;/p&gt;
+
+&lt;h6 id=&quot;step-1-write-down-the-top-5-interactions-a-customer-does-with-this-system&quot;&gt;Step 1: Write down the top 5 interactions a customer does with this system&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;Signup and Add payment&lt;/li&gt;
+  &lt;li&gt;Create a new cart and add menu items&lt;/li&gt;
+  &lt;li&gt;Update items on a card&lt;/li&gt;
+  &lt;li&gt;Checkout&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;step-2-refine-and-consolidate&quot;&gt;Step 2: Refine and consolidate&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;Account setup (signup, add payments)&lt;/li&gt;
+  &lt;li&gt;Shopping (create a cart and add menu items)&lt;/li&gt;
+  &lt;li&gt;Configure menu (creates menu, edit menu items)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;step-3-finalize-root-url-paths&quot;&gt;Step 3: Finalize root URL paths&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;/account-setup/&lt;/li&gt;
+  &lt;li&gt;/shopping/&lt;/li&gt;
+  &lt;li&gt;/menu/&lt;/li&gt;
+  &lt;li&gt;/menu-editor/&lt;/li&gt;
+  &lt;li&gt;/restaurant/&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;step-4-provide-shortcuts-for-many-to-many-assignments&quot;&gt;Step 4: Provide shortcuts for many to many assignments&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;/menu/&lt;strong&gt;menu-items/:menuItem/restaurants&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;/restaurant/:restaurantId/menu-item&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;step-5-convert-similar-urls-to-filter-sort-and-exclude&quot;&gt;Step 5: Convert similar urls to filter, sort and exclude&lt;/h6&gt;
+&lt;ul&gt;
+  &lt;li&gt;/get-highest-rating-restaurants becomes
+    &lt;ul&gt;
+      &lt;li&gt;/restaurant/?sort=rating+DESC&amp;amp;limit=10&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;from: /get-lowest-rating-restaurants
+    &lt;ul&gt;
+      &lt;li&gt;to: /restaurant/?sort=rating+ASC&amp;amp;limit=10&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;/get-all-restaurants
+    &lt;ul&gt;
+      &lt;li&gt;/restaurant&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;/get-chain-resturants
+    &lt;ul&gt;
+      &lt;li&gt;/restaurant?filter=type:chain&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;/get-restaurant-owned-by-mcdonalds
+    &lt;ul&gt;
+      &lt;li&gt;/restaurant?alias=mcdonalds&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Step 6: Alias common queries
+    &lt;ul&gt;
+      &lt;li&gt;/get-restaurants-closed-last-month
+        &lt;ul&gt;
+          &lt;li&gt;/restaurant?alias=closed-last-montly&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h4&gt;
+
+&lt;p&gt;Getting everything right is always hard. Do understand that REST is going to be as close as possible, but be practical. Above everything else remain consistent and your API will be pleasant to use in the long run.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 22 May 2020 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000/software/2020/05/22/opinionated-rest-url-design.html</link>
+        <guid isPermaLink="true">http://localhost:4000/software/2020/05/22/opinionated-rest-url-design.html</guid>
+        
+        
+        <category>Software</category>
+        
+      </item>
+    
+      <item>
+        <title>REST API guidelines are outdated and insufficient</title>
+        <description>&lt;p&gt;A year after your project execution you realize that the APIs are messy and inconsistent. Things looked good when you started the project, so where did you go wrong? Was it you or was it REST?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Story line&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;slim-toc&quot; id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#why-did-we-invent-rest-apis&quot; id=&quot;markdown-toc-why-did-we-invent-rest-apis&quot;&gt;Why did we invent REST APIs?&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#medium-of-access&quot; id=&quot;markdown-toc-medium-of-access&quot;&gt;Medium of access&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#not-a-one-person-job&quot; id=&quot;markdown-toc-not-a-one-person-job&quot;&gt;Not a one person job&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#languages-and-development-frameworks&quot; id=&quot;markdown-toc-languages-and-development-frameworks&quot;&gt;Languages and Development Frameworks&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#the-internet-standards-pyramid&quot; id=&quot;markdown-toc-the-internet-standards-pyramid&quot;&gt;The Internet standards pyramid&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#application-layer-standardization&quot; id=&quot;markdown-toc-application-layer-standardization&quot;&gt;Application layer standardization&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#introduction-of-rest&quot; id=&quot;markdown-toc-introduction-of-rest&quot;&gt;Introduction of REST&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#theoretical-principles&quot; id=&quot;markdown-toc-theoretical-principles&quot;&gt;Theoretical Principles&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#shortcomings-of-rest-apis&quot; id=&quot;markdown-toc-shortcomings-of-rest-apis&quot;&gt;Shortcomings of REST APIs&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#rest-in-practice-is-a-lie-mostly&quot; id=&quot;markdown-toc-rest-in-practice-is-a-lie-mostly&quot;&gt;REST in practice is a lie (mostly)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#guarantees-in-a-rest-api&quot; id=&quot;markdown-toc-guarantees-in-a-rest-api&quot;&gt;Guarantees in a REST API&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#conclusion&quot; id=&quot;markdown-toc-conclusion&quot;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;why-did-we-invent-rest-apis&quot;&gt;Why did we invent REST APIs?&lt;/h2&gt;
+
+&lt;p&gt;The internet was largely composed of static websites around 2000. Visiting a website like foobar.com/some/path would return HTML content back which the browsers knew how to render.&lt;/p&gt;
+
+&lt;p&gt;You clicked and the server hurdled back another new page. This back and forth pingpong was largely how the World Wide Web was pieced together.&lt;/p&gt;
+
+&lt;p&gt;These were indeed happy and simple times, however, not as exciting and chaotic as today - just 20 years later.&lt;/p&gt;
+
+&lt;p&gt;Yahoo homepage in 2000 loaded minimal html with static content, but the 2020 website has &lt;em&gt;infinite scrolling, rotating news, covid updates, dynamically rotating advertisement and a dynamic trending news section and much more&lt;/em&gt;. We also went from large desktop computers to IoTs.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020-05-20-REST-is-not-a-standard/yahoo-comparision.png&quot; alt=&quot;yahoo website in 2000&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A number of things influenced the application layer development.&lt;/p&gt;
+
+&lt;h5 id=&quot;medium-of-access&quot;&gt;Medium of access&lt;/h5&gt;
+
+&lt;p&gt;Your million dollar weather app business in 2000 had a single web page to serve to your customers through their desktops.&lt;/p&gt;
+
+&lt;p&gt;Contrast that to this day - a VC funded silicon valley company with a brilliant weather app. The first version works seamlessly on a native IOs app, native android App, native desktop application, native laptop application and on IoT device by your bedside that runs on an iPad like device and oh … finally all the different web browsers. Here is the kicker!&lt;/p&gt;
+
+&lt;p&gt;All devices must be in sync with the cities I configured the weather. Who does’t love getting weather notifications across 5 devices a few seconds apart!&lt;/p&gt;
+
+&lt;h5 id=&quot;not-a-one-person-job&quot;&gt;Not a one person job&lt;/h5&gt;
+
+&lt;p&gt;The apps are so rich that sometimes, a single company might not be powering all the data that a customer sees.&lt;/p&gt;
+
+&lt;p&gt;In the example of yahoo, the weather app is likely developed by another third party company that yahoo has no control over. This is also true of large companies with thousands of engineers too.&lt;/p&gt;
+
+&lt;h5 id=&quot;languages-and-development-frameworks&quot;&gt;Languages and Development Frameworks&lt;/h5&gt;
+
+&lt;p&gt;App development could happen in swift, objectiveC, Javascript, C#, Java.&lt;/p&gt;
+
+&lt;p&gt;Server might be running in CGI scripts, PHP, JAVA, Ruby, Python, C#, Golang, Rust, Node.js and others.&lt;/p&gt;
+
+&lt;p&gt;We have to make them all understand each other.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-internet-standards-pyramid&quot;&gt;The Internet standards pyramid&lt;/h2&gt;
+
+&lt;p&gt;Interoperability - A cornerstone requirement for the web to function. In order for different devices, teams, languages to interact, they need to understand each other.&lt;/p&gt;
+
+&lt;p&gt;Standards allows the interoperability of multiple devices developed by different teams to interact with multiple web services written in different languages. Some ideas become concrete enough to become a true standard, while others die trying.&lt;/p&gt;
+
+&lt;p&gt;In late 1990s we saw browser wars where their capabilities allowed innovation but left us with a largely broken ecosystem - a feature would work in internet explorer but not on netscape. Each new rendering or scripting feature addition to netscape was a way for web developers to build richer experience for netscape customers. This ultimately resulted in a state where a website would either work on netscape or on internet explored.&lt;/p&gt;
+
+&lt;p&gt;Standardization bodies like the IETF, W3C and the now ceased The Web Standards Project stepped in to establish standards that are the minimal set of capabilities that all browsers should adhere to by standardizing the specs for fundamental systems like HTML, HTTP and others.&lt;/p&gt;
+
+&lt;p&gt;HTML or HTTP is one tiny piece of the puzzle. If you think about all the technologies that are needed for your cat video to show up, it is truly incredible. Along the layers of technology stack, there are numerous standardizations.&lt;/p&gt;
+
+&lt;h5 id=&quot;application-layer-standardization&quot;&gt;Application layer standardization&lt;/h5&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020-05-20-REST-is-not-a-standard/standards-pyramid.png&quot; alt=&quot;standards pyramid&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Enforcing standards are hard where there is room for a lot of creativity. The bottom most layers of the pyramid above provide relatively less creative space. 
+Most engineers do not delve to that level during a normal day or product development.&lt;/p&gt;
+
+&lt;p&gt;If you deviate from the spec/standard of DNS, there is change the internet is not going to work.&lt;/p&gt;
+
+&lt;p&gt;However, the highest layers are areas of creative playground. It is really hard to set an exact spec/standard on a website layout. One may prescribe the accepted colors and tone of the copy. But the final outcome from two developers will be different.&lt;/p&gt;
+
+&lt;p&gt;Same is true for REST APIs. Let us get into what REST is and how it has failed us but it survives us too.&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction-of-rest&quot;&gt;Introduction of REST&lt;/h2&gt;
+
+&lt;p&gt;REST was introduced In 2000 by Roy fielding as part of a PHD thesis.&lt;/p&gt;
+
+&lt;p&gt;APIs existed even before the formalization of HTTP in 1997. XMLHttpRequest (XHR) in browsers in the mid 2000’s was a pivotal moment when APIs became mainstream. This allowed a browsers to speak multiple requests to the server and fetch the information they need without reloading the entire view. This essentially gave birth to the the now commonly known term web APIs.&lt;/p&gt;
+
+&lt;p&gt;APIs became the contract between the backend and the frontend systems to “transfer state”.&lt;/p&gt;
+
+&lt;p&gt;HTTP was already providing the core component of data transfer protocol between server and client. The primary anatomy of a HTTP had 3 components&lt;/p&gt;
+
+&lt;p&gt;Representational State Transfer (REST) was an architectural proposal of how to use the 3 HTTP components (uri, header, body) to create some uniformity when building business applications that represent server state on the client.&lt;/p&gt;
+
+&lt;h5 id=&quot;theoretical-principles&quot;&gt;Theoretical Principles&lt;/h5&gt;
+
+&lt;p&gt;REST was originally a guidance, the foundational pieces were concrete but the final implementation was open ended. Let us start with the principles of REST as originally proposed&lt;/p&gt;
+
+&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col width=&quot;30%&quot; /&gt;
+        &lt;col width=&quot;70%&quot; /&gt; &lt;/colgroup&gt;
+    &lt;thead&gt;
+        &lt;tr class=&quot;header&quot;&gt;
+            &lt;th&gt;Principle&lt;/th&gt;
+            &lt;th&gt;Outcome&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;strong&gt;Client-Server&lt;/strong&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                 &lt;span class=&quot;success text-padding&quot;&gt;Success&lt;/span&gt;&lt;br /&gt;
+                 &lt;em&gt;A separation of client vs server allowing us to swap either of them&lt;/em&gt; - We see android, IOS devices, IOTs, laptops and desktop driven by mostly similar APIs. However this comes out of the box from HTTP 1.1
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;strong&gt;Layered system&lt;/strong&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;span class=&quot;success text-padding&quot;&gt;Success&lt;/span&gt;&lt;br /&gt;
+                The client truly is un aware of the layers serving the data.
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;strong&gt;Stateless&lt;/strong&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;span class=&quot;warning text-padding&quot;&gt;Partial Success&lt;/span&gt;&lt;br /&gt;
+                &lt;em&gt;Each request from client to server must contain all of the information necessary to understand the request&lt;/em&gt; - The areas where it deviates are in cases where we keep server session data for security and authentication
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;strong&gt;Cacheable&lt;/strong&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;span class=&quot;warning text-padding&quot;&gt;Partial Success&lt;/span&gt;&lt;br /&gt;
+                &lt;em&gt;Each request from client to server must contain all of the information necessary to understand the request&lt;/em&gt; - The areas where it deviates are in cases where we keep server session data for security and authentication
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;strong&gt;Uniform interface&lt;/strong&gt;
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;span class=&quot;danger text-padding&quot;&gt;Failure&lt;/span&gt;&lt;br /&gt;
+                Not much value beyond HTTP 1.1 specs
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;shortcomings-of-rest-apis&quot;&gt;Shortcomings of REST APIs&lt;/h2&gt;
+
+&lt;p&gt;The promise of each of these principles were only partially fulfilled. REST provides us parts and components and some suggestions, but nothing stops us from reinventing the wheel or REST is straight up not a good fit. If we drew up the needs of the business and what REST satisfies, it’s a small subset.&lt;/p&gt;
+
+&lt;p&gt;REST did not aspire to be an all encompassing standards or guidance for building the business application. We have just embraced it blindly to be that.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020-05-20-REST-is-not-a-standard/http-rest-business-overlap.png&quot; alt=&quot;rest api standards&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;rest-in-practice-is-a-lie-mostly&quot;&gt;REST in practice is a lie (mostly)&lt;/h5&gt;
+
+&lt;p&gt;Here are some scenarios which occurs 80% of the time when developing complex web applications. We will list down the choices. It clearly shows the gaps in REST.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Large get URL&lt;/strong&gt; - Sometimes a get URL has too many parameters. We see developers convert these semantically get calls into a POST request. We can see this done in elastic search queries.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;GET side effects&lt;/strong&gt; - In practical applications we see GET APIs emitting events (Kafka or any other system). If we were to calculate the airline price using events with GET, we are clearly changing the state of the system with each GET access.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Complex URL&lt;/strong&gt; - a GET request does not have the ability to send arrays, hash, or set via query URI. Different languages &amp;amp; frameworks interpret it differently. The REST principles of uniformity or client-server interoperability is broken in these cases.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Variations in resource access&lt;/strong&gt; - Complex business cases have many ways to access a resource. E.g., firstHotel, lastHotel, firstHotelVieableByCustomer, firstHotelForKayakIntegration, firstHotelForPricelineIntegration. While it is idealistic to want to put it into /hotel?[parameters]. I bet you to convince your engineer to do that. Testing, blast radius isolation, legacy code, or just completely different semantics might push us to have multiple URIs for the same resource.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Bidirectional data&lt;/strong&gt; - There are APIs where the server sends clients data via HTTP2 or SSE. Example, if a server wants to send price changes to the connected app. The request originates from the server by calling an API which sends the data via a persistent connection. There is no constructs for this in REST.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Caching&lt;/strong&gt; - For large APIs which return a huge amount of information, caching is likely needed at a more granular level than at the API. This is especially true in the case of bidirectional data. There is no REST guidance to rest upon.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Business Errors&lt;/strong&gt; - A user’s credit card payment API errors due to credit card failure, should the API return a 200 or 400 error? you might think 400 as the card is wrong. What if it was due to previous arrears and not due to any input in the current request, would it still be a 400 even through it was not a client error w.r.t this request?. As you can see, issues like this are very common in practical applications with no clear guidelines.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;HATEOAS&lt;/strong&gt; - The concept of recursive explication might work for some basic graph data models but it is not practical for a majority of business applications. it further creates chattiness between the server and the client. This is the worst for of N+1 query between a highly latency prone network layer.    Most practical applications stay away from this ‘REST’ feature.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;APIs per consumer&lt;/strong&gt; - As the number of devices and experiences increase, the flow between those devices start diverting. E.g., your experience of booking an airline from the app might be different from that on a desktop. As the experiences change, the APIs will need to be different. With this the reusability is out of the window and the need for multiple APIs looking similar happens.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Versioning&lt;/strong&gt; -  No one has come to terms with one approach that is easy and has meaning. Unlike server for software, versioning is not as easy in APIs as it spans multiple dimensions like schema, logic.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;guarantees-in-a-rest-api&quot;&gt;Guarantees in a REST API&lt;/h5&gt;
+
+&lt;p&gt;When using REST, here are the lowest common denominator that you can safely assume. Anything beyond the following assumption could anytime turn out to be a lie.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;URL&lt;/strong&gt; - Do not assume the semantic meaning. Use it just to locate the handler function&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;GET&lt;/strong&gt; - All parameters are in the URL and headers&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;POST&lt;/strong&gt; - Parameters can be in URL, header and body&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Never assume 400, 500, or 200 as business semantics&lt;/strong&gt; - Always just assume they are system (client, server) issues. Introspect how business errors are surfaced in the specific implementation as it will be different between different projects.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;We have relied on REST for almost 20 years and it is time for a change. We have to consider the complexities we see in our business today and ideate a new standard from he ground up. This time, we should really put practice into theory instead of the other way around.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 20 May 2020 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html</link>
+        <guid isPermaLink="true">http://localhost:4000/software/2020/05/20/REST-is-not-a-standard.html</guid>
+        
+        
+        <category>Software</category>
+        
+      </item>
     
       <item>
         <title>Self-hosted password manager</title>
